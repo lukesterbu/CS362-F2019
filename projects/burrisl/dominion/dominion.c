@@ -576,14 +576,12 @@ int drawCard(int player, struct gameState *state)
         state->deckCount[player] = state->discardCount[player];
         state->discardCount[player] = 0;//Reset discard
 
-        //Shufffle the deck
+        //Shuffle the deck
         shuffle(player, state);//Shuffle the deck up and make it so that we can draw
 
         if (DEBUG) { //Debug statements
             printf("Deck count now: %d\n", state->deckCount[player]);
         }
-
-        state->discardCount[player] = 0;
 
         //Step 2 Draw Card
         count = state->handCount[player];//Get current player's hand count
@@ -1108,9 +1106,9 @@ void doMinion(int currentPlayer, int choice1, int choice2, struct gameState *sta
                 if ( state->handCount[player] > 4 )
                 {
                     //discard hand
-                    while( state->handCount[player] > 0 )
+                    for (j = 0; j < state->handCount[currentPlayer]; j++)
                     {
-                        discardCard(handPos, player, state, 0);
+                        discardCard(j, player, state, 0);
                     }
                     //draw 4
                     for (j = 0; j < 4; j++)
