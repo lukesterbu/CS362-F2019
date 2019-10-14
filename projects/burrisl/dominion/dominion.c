@@ -898,7 +898,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
-        doTribute(currentPlayer, nextPlayer, *tributeRevealedCards, choice1, choice2, state, handPos);
+        doTribute(currentPlayer, nextPlayer, tributeRevealedCards, choice1, choice2, state, handPos);
         return 0;
 
     case ambassador:
@@ -1034,7 +1034,7 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
         while(card_not_discarded) {
             if (state->hand[currentPlayer][selectedCard] == estate) { //Found an estate card!
                 state->coins += 4; //Add 4 coins to the amount of coins
-                state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
+                state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][selectedCard];
                 state->discardCount[currentPlayer]++;
                 //Set each card slot equal to the next card to account for the discarded card
                 for (; selectedCard < state->handCount[currentPlayer]; selectedCard++) {
@@ -1094,24 +1094,24 @@ void doMinion(int currentPlayer, int choice1, int choice2, struct gameState *sta
             discardCard(handPos, currentPlayer, state, 0);
         }
         //draw 4
-        for (i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             drawCard(currentPlayer, state);
         }
         //other players discard hand and redraw if hand size > 4
-        for (player = 0; player < state->numPlayers; player++)
+        for (int player = 0; player < state->numPlayers; player++)
         {
             if (player != currentPlayer)
             {
                 if ( state->handCount[player] > 4 )
                 {
                     //discard hand
-                    for (j = 0; j < state->handCount[currentPlayer]; j++)
+                    for (int j = 0; j < state->handCount[currentPlayer]; j++)
                     {
                         discardCard(j, player, state, 0);
                     }
                     //draw 4
-                    for (j = 0; j < 4; j++)
+                    for (int j = 0; j < 4; j++)
                     {
                         drawCard(player, state);
                     }
@@ -1133,7 +1133,7 @@ void doAmbassador(int currentPlayer, int choice1, int choice2, struct gameState 
     {
         return 0; // Should return -1 **BUG**
     }
-    for (i = 0; i < state->handCount[currentPlayer]; i++)
+    for (int i = 0; i < state->handCount[currentPlayer]; i++)
     {
         if (i != handPos && i == state->hand[currentPlayer][choice1] && i != choice1)
         {
@@ -1151,7 +1151,7 @@ void doAmbassador(int currentPlayer, int choice1, int choice2, struct gameState 
     //increase supply count for choosen card by amount being discarded
     state->supplyCount[state->hand[currentPlayer][choice1]] += choice2;
     //each other player gains a copy of revealed card
-    for (player = 0; player < state->numPlayers; player++)
+    for (int player = 0; player < state->numPlayers; player++)
     {
         if (player != currentPlayer)
         {
@@ -1161,9 +1161,9 @@ void doAmbassador(int currentPlayer, int choice1, int choice2, struct gameState 
     //discard played card from hand
     discardCard(handPos, currentPlayer, state, 0);
     //trash copies of cards returned to supply
-    for (j = 0; j < choice2; j++)
+    for (int j = 0; j < choice2; j++)
     {
-        for (card = 0; card < state->handCount[currentPlayer]; card++)
+        for (int card = 0; card < state->handCount[currentPlayer]; card++)
         {
             if (state->hand[currentPlayer][card] == state->hand[currentPlayer][choice1])
             {
@@ -1195,7 +1195,7 @@ void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, int
     }
     else {
         if (state->deckCount[nextPlayer] == 0) {
-            for (i = 0; i < state->discardCount[nextPlayer]; i++) {
+            for (int i = 0; i < state->discardCount[nextPlayer]; i++) {
                 state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                 state->deckCount[nextPlayer]++;
                 state->discard[nextPlayer][i] = -1;
@@ -1203,7 +1203,7 @@ void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, int
             }
             shuffle(nextPlayer,state);//Shuffle the deck
         }
-        for (i = 0; i < 2; i++) // Do this twice, once for each tributeRevealedCard
+        for (int i = 0; i < 2; i++) // Do this twice, once for each tributeRevealedCard
         {
             tributeRevealedCards[i] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
@@ -1215,7 +1215,7 @@ void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, int
         state->playedCardCount++;
         tributeRevealedCards[1] = -1;
     }
-    for (i = 0; i < 3; i ++) { // Should be i < 2 **BUG**
+    for (int i = 0; i < 3; i ++) { // Should be i < 2 **BUG**
         // Treasure Card
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 2;
@@ -1251,7 +1251,7 @@ void doMine(int currentPlayer, int choice1, int choice2, struct gameState *state
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
     //discard trashed card
-    for (card = 0; card < state->handCount[currentPlayer]; card++)
+    for (int card = 0; card < state->handCount[currentPlayer]; card++)
     {
         if (state->hand[currentPlayer][card] == trashCard)
         {
