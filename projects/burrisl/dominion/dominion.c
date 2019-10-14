@@ -804,7 +804,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return -1;
 
     case mine:
-        doMine(currentPlayer, choice1, choice2, *state, handPos);
+        doMine(currentPlayer, choice1, choice2, state, handPos);
         return 0;
 
     case remodel:
@@ -856,7 +856,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case baron:
-        doBaron(currentPlayer, choice1, *state);
+        doBaron(currentPlayer, choice1, state);
         return 0;
 
     case great_hall:
@@ -871,7 +871,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case minion:
-        doMinion(currentPlayer, choice1, choice2, *state, handPos);
+        doMinion(currentPlayer, choice1, choice2, state, handPos);
         return 0;
 
     case steward:
@@ -898,11 +898,11 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
-        doTribute(currentPlayer, nextPlayer, *tributeRevealedCards, choice1, choice2, *state, handPos);
+        doTribute(currentPlayer, nextPlayer, *tributeRevealedCards, choice1, choice2, state, handPos);
         return 0;
 
     case ambassador:
-        doAmbassador(currentPlayer, choice1, choice2, *state, handPos);
+        doAmbassador(currentPlayer, choice1, choice2, state, handPos);
         return 0;
 
     case cutpurse:
