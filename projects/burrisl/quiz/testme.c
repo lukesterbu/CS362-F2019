@@ -5,14 +5,23 @@
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+  // TODO: rewrite this function
+  int n = rand() % (126 - 65) + 65;
+  return n;
 }
 
 char *inputString()
 {
-    // TODO: rewrite this function
-    return "";
+  // TODO: rewrite this function
+  // According to testme() this should return a 5 letter word
+  char s[6];
+  s[0] = inputChar();
+  s[1] = inputChar();
+  s[2] = inputChar();
+  s[3] = inputChar();
+  s[4] = inputChar();
+  s[5] = inputChar();
+  return s;
 }
 
 void testme()
@@ -48,10 +57,9 @@ void testme()
   }
 }
 
-
 int main(int argc, char *argv[])
 {
-    srand(time(NULL));
-    testme();
-    return 0;
+  srand(time(NULL));
+  testme();
+  return 0;
 }
