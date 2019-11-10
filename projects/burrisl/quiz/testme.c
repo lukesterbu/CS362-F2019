@@ -20,8 +20,8 @@ char *inputString()
   s[2] = inputChar();
   s[3] = inputChar();
   s[4] = inputChar();
-  s[5] = inputChar();
-  return &s;
+  s[5] = '\0';
+  return s;
 }
 
 void testme()
