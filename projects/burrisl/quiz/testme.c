@@ -19,11 +19,9 @@ char *inputString()
   // TODO: rewrite this function
   // According to testme() this should return a 5 letter word
   char *s = malloc(5);
-  s[0] = inputChar();
-  s[1] = inputChar();
-  s[2] = inputChar();
-  s[3] = inputChar();
-  s[4] = inputChar();
+  for(int i = 0; i < 5; i++) {
+    s[i] = (rand() % 16) + 101;
+  }
   return s;
 }
 
