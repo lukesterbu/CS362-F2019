@@ -21,7 +21,8 @@ char *inputString()
   // If the word is "reset" the program will end
   char *s = malloc(6);
   char letters[4] = {'e','r','s','t'};
-  for(int i = 0; i < 5; i++) {
+  int i;
+  for(i = 0; i < 5; i++) {
     // Only lowercase letters
     int chance = rand() % 4;
     s[i] = letters[chance];
