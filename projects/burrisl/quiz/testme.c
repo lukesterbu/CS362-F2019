@@ -18,9 +18,11 @@ char *inputString()
 {
   // TODO: rewrite this function
   // According to testme() this should return a 5 letter word
+  // If the word is "reset" the program will end
   char *s = malloc(5);
   for(int i = 0; i < 5; i++) {
-    s[i] = (rand() % 16) + 101;
+    // Only lowercase letters
+    s[i] = rand() % (122 - 97) + 97;
   }
   return s;
 }
