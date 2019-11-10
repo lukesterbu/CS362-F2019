@@ -21,7 +21,7 @@ char *inputString()
   s[3] = inputChar();
   s[4] = inputChar();
   s[5] = inputChar();
-  return s;
+  return &s;
 }
 
 void testme()
