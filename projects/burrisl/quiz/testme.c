@@ -20,9 +20,11 @@ char *inputString()
   // According to testme() this should return a 5 letter word
   // If the word is "reset" the program will end
   char *s = malloc(6);
+  char letters[4] = {'e','r','s','t'};
   for(int i = 0; i < 5; i++) {
     // Only lowercase letters
-    s[i] = (rand() % (116 - 101 + 1)) + 101;
+    int chance = rand() % 4;
+    s[i] = letters[chance];
   }
   s[5] = '\0';
   return s;
