@@ -16,7 +16,7 @@ char *inputString()
   // According to testme() this should return a 5 letter word
   char s[] = "Hello";
   s[0] = inputChar();
-  return s;
+  return &s;
 }
 
 void testme()
