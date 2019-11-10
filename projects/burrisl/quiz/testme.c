@@ -14,13 +14,12 @@ char *inputString()
 {
   // TODO: rewrite this function
   // According to testme() this should return a 5 letter word
-  char s[6];
+  char s[5];
   s[0] = inputChar();
   s[1] = inputChar();
   s[2] = inputChar();
   s[3] = inputChar();
   s[4] = inputChar();
-  s[5] = '\0';
   return s;
 }
 
