@@ -6,7 +6,11 @@
 char inputChar()
 {
   // TODO: rewrite this function
-  int n = rand() % (126 - 65) + 65;
+  int n = rand() % (126 - 32) + 32;
+  // Make the letter lowercase if uppercase
+  if (n >= 65 && n <= 90) {
+    n += 32;
+  }
   return n;
 }
 
@@ -14,9 +18,13 @@ char *inputString()
 {
   // TODO: rewrite this function
   // According to testme() this should return a 5 letter word
-  char s[] = "Hello";
+  char *s = malloc(5);
   s[0] = inputChar();
-  return &s;
+  s[1] = inputChar();
+  s[2] = inputChar();
+  s[3] = inputChar();
+  s[4] = inputChar();
+  return s;
 }
 
 void testme()
@@ -35,7 +43,7 @@ void testme()
     if (c == '[' && state == 0) state = 1;
     if (c == '(' && state == 1) state = 2;
     if (c == '{' && state == 2) state = 3;
-    if (c == ' '&& state == 3) state = 4;
+    if (c == ' ' && state == 3) state = 4;
     if (c == 'a' && state == 4) state = 5;
     if (c == 'x' && state == 5) state = 6;
     if (c == '}' && state == 6) state = 7;
