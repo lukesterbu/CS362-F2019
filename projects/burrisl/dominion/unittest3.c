@@ -126,6 +126,7 @@ int main(int argc, char** argv) {
 
     // Switch variables so test should pass
     state.hand[currentPlayer][1] = estate;
+    state.hand[currentPlayer][2] = silver;
     choice1 = 1;
     choice2 = 1;
     state.coins = 0;
@@ -137,7 +138,7 @@ int main(int argc, char** argv) {
     state.supplyCount[tempCard] = 10;
 
     // Call the function being tested;
-    doAmbassador(currentPlayer, choice1, choice2, &state, 0);
+    doAmbassador(currentPlayer, choice1, choice2, &state, 2);
 
     // Do tests
     printFormatted("SUBTEST 4 - Rest of Code.");
