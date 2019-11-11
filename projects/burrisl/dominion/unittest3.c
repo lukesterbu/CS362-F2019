@@ -128,6 +128,7 @@ int main(int argc, char** argv) {
     choice1 = 1;
     choice2 = 1;
     state.coins = 0;
+    state.discardCount[otherPlayer] = 0;
     state.discardCount[currentPlayer] = 0;
 
     // Store this for later since it will get changed once doAmbassador is called
@@ -140,6 +141,7 @@ int main(int argc, char** argv) {
     // Do tests
     printFormatted("SUBTEST 4 - Rest of Code.");
     checkTrue(state.supplyCount[tempCard], 11, "Supply Count Should Increase By 1.");
-    checkTrue(state.discardCount[otherPlayer], 1, "Discard Count Should Increase By 1.");
+    checkTrue(state.discardCount[otherPlayer], 1, "Other Player Discard Count Should Increase By 1.");
+    checkTrue(state.discardCount[currentPlayer], 1, "Current Player Discard Count Should Increase By 1.")
 	return 0;
 }
