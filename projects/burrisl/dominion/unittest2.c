@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
     // Do tests
     printFormatted("SUBTEST 2 - choice2 = 1. Check When Player Chooses to Discard.");
     checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Equals 4.");
-    checkTrue(state.handCount[otherPlayer], 4, "Other Player Hand Count Equals 4.");
+    checkTrue(state.handCount[otherPlayer], 4, "Other Player Hand Count Equals 4."); // This should fail because of my bug
 
     return 0;
 }
