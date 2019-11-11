@@ -58,9 +58,6 @@ int main(int argc, char** argv) {
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
 
-    // Call the function being tested;
-    doAmbassador(currentPlayer, choice1, choice2, &state, 0);
-
     // Do tests
     printFormatted("SUBTEST 1 - choice2 = 3.");
     checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
@@ -81,9 +78,6 @@ int main(int argc, char** argv) {
     choice2 = -1;
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
-
-    // Call the function being tested;
-    doAmbassador(currentPlayer, choice1, choice2, &state, 0);
 
     // Do tests
     printFormatted("SUBTEST 2 - choice2 = -1.");
@@ -106,9 +100,6 @@ int main(int argc, char** argv) {
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
 
-    // Call the function being tested;
-    doAmbassador(currentPlayer, choice1, choice2, &state, 0);
-
     // Do tests
     printFormatted("SUBTEST 3 - choice1 == handPos.");
     checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
@@ -129,9 +120,6 @@ int main(int argc, char** argv) {
     choice2 = 10;
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
-
-    // Call the function being tested;
-    doAmbassador(currentPlayer, choice1, choice2, &state, 0);
 
     // Do tests
     printFormatted("SUBTEST 4 - j < choice2.");

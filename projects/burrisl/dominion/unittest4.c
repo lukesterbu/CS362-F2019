@@ -1,3 +1,7 @@
+/**************************************************************************
+** Author: 		Luke Burris
+** Description:	Tests the doTribute() function using my checkTrue function()
+**************************************************************************/
 #include "dominion.h"
 #include "rngs.h"
 #include <stdio.h>
@@ -21,7 +25,41 @@ void checkTrue(int x, int y, char* desc) {
 }
 
 int main(int argc, char** argv) {
-	// Unit test for Minion
+	int r;
+    int choice1;
+    int choice2;
+    // This is a real value
+    int numPlayers = 2;
+    int currentPlayer = 0;
+    int otherPlayer = 1;
+    
+    int k[10] = {adventurer, council_room, feast, gardens, mine,
+        remodel, smithy, village, baron, great_hall};
 
+    struct gameState state;
+
+    printf("\n\n");
+    printFormatted("UNITTEST4 - doTribute()");
+	
+    /***************************************************************************************
+    ** choice2 > 2. This will fail due to my bug
+    ***************************************************************************************/
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    r = initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    choice1 = 0;
+    choice2 = 3;
+    state.coins = 0;
+    state.discardCount[currentPlayer] = 0;
+
+    // Do tests
+    printFormatted("SUBTEST 1 - choice2 = 3.");
+    checkTrue(doTribute(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
 	return 0;
 }
