@@ -112,6 +112,30 @@ int main(int argc, char** argv) {
     // Do tests
     printFormatted("SUBTEST 3 - choice1 == handPos.");
     checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+
+    /***************************************************************************************
+    ** j < choice2.
+    ***************************************************************************************/
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    r = initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    choice1 = 0;
+    choice2 = 10;
+    state.coins = 0;
+    state.discardCount[currentPlayer] = 0;
+
+    // Call the function being tested;
+    doAmbassador(currentPlayer, choice1, choice2, &state, 0);
+
+    // Do tests
+    printFormatted("SUBTEST 4 - j < choice2.");
+    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
 	
     /***************************************************************************************
     ** Rest of Code
@@ -141,7 +165,7 @@ int main(int argc, char** argv) {
     doAmbassador(currentPlayer, choice1, choice2, &state, 2);
 
     // Do tests
-    printFormatted("SUBTEST 4 - Rest of Code.");
+    printFormatted("SUBTEST 5 - Rest of Code.");
     checkTrue(state.supplyCount[tempCard], 10, "Supply Count Should Stay 10.");
     checkTrue(state.discardCount[otherPlayer], 1, "Other Player Discard Count Should Increase By 1.");
     checkTrue(state.discardCount[currentPlayer], 1, "Current Player Discard Count Should Increase By 1.");
