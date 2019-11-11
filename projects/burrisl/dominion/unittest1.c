@@ -53,6 +53,32 @@ int main () {
     checkTrue(state.handCount[currentPlayer], 4, "Hand Count Decreased By 1");
 
     /***************************************************************************************
+    ** Test to see if an estate card is found in the hand when choice1 <= 0
+    ***************************************************************************************/
+    // Standard setup
+    memset(&state, 23, sizeof(struct gameState));
+    r = initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+    	state.hand[currentPlayer][i] = copper; // Set all of the cards to estates
+    }
+    state.hand[currentPlayer][0] = estate; // This will find the bug since the first card is ignored
+    // Switch variables so test should pass
+    choice1 = 1;
+    state.hand[currentPlayer][4] = estate; // Set one of the cards to be an estate
+    state.coins = 0;
+    state.discardCount[currentPlayer] = 0;
+
+    // Call the function being tested;
+    doBaron(currentPlayer, choice1, &state);
+
+    // Do tests
+    printf("%d\n", state.coins);
+    checkTrue(state.coins, 4, "Coins Increased By 4"); // This will fail because of my bug
+    checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased By 1");
+    checkTrue(state.handCount[currentPlayer], 4, "Hand Count Decreased By 1"); // This will fail because of my bug
+
+    /***************************************************************************************
     ** Test to see if an estate card is not found in the hand when choice 1 <= 0
     ***************************************************************************************/
     // Standard setup
