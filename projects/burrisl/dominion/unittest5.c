@@ -162,10 +162,11 @@ int main(int argc, char** argv) {
     choice2 = treasure_map;
     state.coins = 0;
     state.hand[currentPlayer][choice1] = copper;
+    state.deckCount[currentPlayer] = 10;
 
     // Do tests
     printFormatted("SUBTEST 6 - Rest of Code.");
     checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), 0, "Should Return 0.");
-    checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Decrease by 1");
+    checkTrue(state.deckCount[currentPlayer], 10, "Current Player Deck Count Shouldn't Change");
 	return 0;
 }

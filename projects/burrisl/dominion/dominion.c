@@ -1249,7 +1249,7 @@ int doMine(int currentPlayer, int choice1, int choice2, struct gameState *state,
         if (state->hand[currentPlayer][card] == trashCard)
         {
             discardCard(card, currentPlayer, state, 1);
-            // break; Shouldn't be commented out **BUG** 
+            break;
         }
     }
     return 0;
