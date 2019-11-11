@@ -7,10 +7,10 @@
 // Returns 1 if true and 0 if false
 int checkTrue(int x, int y, char* desc) {
 	if (x == y) {
-		printf("PASSED - %s", desc);
+		printf("PASSED - %s\n", desc);
 	}
 	else {
-		printf("FAILED - %s", desc);
+		printf("FAILED - %s\n", desc);
 	}
 }
 
