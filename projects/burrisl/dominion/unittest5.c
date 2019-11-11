@@ -44,46 +44,43 @@ int main(int argc, char** argv) {
     /***************************************************************************************
     ** state->hand[currentPlayer[choice1] < copper]
     ***************************************************************************************/
-    // Standard Estate setup
+    // Standard Curse setup
     memset(&state, 23, sizeof(struct gameState));
     r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    	state.hand[currentPlayer][i] = curse; // Set all of the cards to curse
     }
 
     // Switch variables so test should pass
     choice1 = 0;
     choice2 = 3;
     state.coins = 0;
-    state.discardCount[currentPlayer] = 0;
-
-    // Call the function being tested;
-    doMine(currentPlayer, choice1, choice2, &state, 0);
+    state.hand[currentPlayer][choice1] = -100;
 
     // Do tests
-    printFormatted("SUBTEST 1 - choice2 = 3.");
-    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    printFormatted("SUBTEST 1 - state->hand[currentPlayer][choice1] < copper.");
+    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
 	
     /***************************************************************************************
     ** state->hand[currentPlayer][choice1] > gold]
     ***************************************************************************************/
-    // Standard Estate setup
+    // Standard Province setup
     memset(&state, 23, sizeof(struct gameState));
     r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    	state.hand[currentPlayer][i] = province; // Set all of the cards to province
     }
 
     // Switch variables so test should pass
     choice1 = 0;
     choice2 = 3;
     state.coins = 0;
-    state.discardCount[currentPlayer] = 0;
+    state.hand[currentPlayer][choice1] = 100;
 
     // Do tests
-    printFormatted("SUBTEST 1 - state->hand[currentPlayer][choice1] > gold.");
+    printFormatted("SUBTEST 2 - state->hand[currentPlayer][choice1] > gold.");
     checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
     
     /***************************************************************************************
@@ -104,7 +101,7 @@ int main(int argc, char** argv) {
     state.discardCount[currentPlayer] = 0;
 
     // Do tests
-    printFormatted("SUBTEST 2 - choice2 > treasure_map.");
+    printFormatted("SUBTEST 3 - choice2 > treasure_map.");
     checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
 
     /***************************************************************************************
@@ -125,13 +122,13 @@ int main(int argc, char** argv) {
     state.discardCount[currentPlayer] = 0;
 
     // Do tests
-    printFormatted("SUBTEST 3 - choice2 < curse.");
+    printFormatted("SUBTEST 4 - choice2 < curse.");
     checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
 
     /***************************************************************************************
     ** (getCost(state->hand[currentPlayer][choice1] + 3) > getCost(choice2)
     ***************************************************************************************/
-    // Standard Estate setup
+    // Standard Province setup
     memset(&state, 23, sizeof(struct gameState));
     r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
@@ -146,7 +143,7 @@ int main(int argc, char** argv) {
     state.discardCount[currentPlayer] = 0;
 
     // Do tests
-    printFormatted("SUBTEST 4 - (getCost(state->hand[currentPlayer][choice1] + 3) > getCost(choice2).");
+    printFormatted("SUBTEST 5 - (getCost(state->hand[currentPlayer][choice1] + 3) > getCost(choice2).");
     checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
 	return 0;
 }
