@@ -27,6 +27,7 @@ void checkTrue(int x, int y, char* desc) {
 int main(int argc, char** argv) {
 	int r;
     int choice1;
+    int choice2;
     // This is a real value
     int numPlayers = 2;
     int currentPlayer = 0;
