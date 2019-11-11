@@ -49,7 +49,7 @@ unittestresults: unittest1 unittest2 unittest3 unittest4 unittest5
 	gcov -b -f dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
 
-all: playdom player 
+all: playdom player unittest1 unittest2 unittest3 unittest4 unittest5
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe  unittest1 unittest2 unittest3 unittest4 unittest5 *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
