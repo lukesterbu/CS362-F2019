@@ -6,7 +6,7 @@
 
 // Returns 1 if true and 0 if false
 int checkTrue(int x, int y, char* desc) {
-	if (int x == int y) {
+	if (x == y) {
 		printf("PASSED - %s", desc);
 	}
 	else {
