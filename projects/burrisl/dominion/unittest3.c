@@ -133,14 +133,14 @@ int main(int argc, char** argv) {
 
     // Store this for later since it will get changed once doAmbassador is called
     int tempCard = state.hand[currentPlayer][choice1];
-    state.supplyCount[state.hand[currentPlayer][choice1]] = 10;
+    state.supplyCount[tempCard] = 10;
 
     // Call the function being tested;
     doAmbassador(currentPlayer, choice1, choice2, &state, 0);
 
     // Do tests
     printFormatted("SUBTEST 4 - Rest of Code.");
-    checkTrue(state.supplyCount[tempCard], 11, "Supply Count Should Increase By 1.");
+    checkTrue(state.supplyCount[tempCard], 10, "Supply Count Should Stay 10.");
     checkTrue(state.discardCount[otherPlayer], 1, "Other Player Discard Count Should Increase By 1.");
     checkTrue(state.discardCount[currentPlayer], 1, "Current Player Discard Count Should Increase By 1.");
 	return 0;
