@@ -149,19 +149,19 @@ int main(int argc, char** argv) {
     /***************************************************************************************
     ** Rest of Code
     ***************************************************************************************/
-    // Standard Province setup
+    // Standard Estate setup
     memset(&state, 23, sizeof(struct gameState));
     r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = province; // Set all of the cards to province
+    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estate
     }
 
     // Switch variables so test should pass
     choice1 = 0;
-    choice2 = 0;
+    choice2 = treasure_map;
     state.coins = 0;
-    state.discardCount[currentPlayer] = 0;
+    state.hand[currentPlayer][choice1] = copper;
 
     // Do tests
     printFormatted("SUBTEST 6 - Rest of Code.");
