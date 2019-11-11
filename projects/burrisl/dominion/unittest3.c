@@ -162,7 +162,7 @@ int main(int argc, char** argv) {
     state.supplyCount[tempCard] = 10;
 
     // Call the function being tested;
-    doAmbassador(currentPlayer, choice1, choice2, &state, 1);
+    printf("%d\n", doAmbassador(currentPlayer, choice1, choice2, &state, 1));
 
     // Do tests
     printFormatted("SUBTEST 5 - Rest of Code.");
