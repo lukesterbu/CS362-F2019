@@ -166,6 +166,6 @@ int main(int argc, char** argv) {
     // Do tests
     printFormatted("SUBTEST 6 - Rest of Code.");
     checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), 0, "Should Return 0.");
-    checkTrue(state.handCount[currentPlayer], 5, "Current Player Hand Count Shouldn't Change");
+    checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Decrease by 1");
 	return 0;
 }
