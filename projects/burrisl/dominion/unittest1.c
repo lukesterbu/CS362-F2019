@@ -34,7 +34,7 @@ int main () {
     r = initializeGame(2, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = copper;
+    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
     }
     // Switch variables so test should pass
     choice1 = 0;
@@ -47,6 +47,7 @@ int main () {
 
     // Do tests
     printf("%d\n", state.coins);
+    checkTrue(state.numBuys, 1, "Buys Increased By 1");
     checkTrue(state.coins, 4, "Coins Increased By 4");
     checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased By 1");
     checkTrue(state.handCount[currentPlayer], 4, "Hand Count Decreased By 1");
