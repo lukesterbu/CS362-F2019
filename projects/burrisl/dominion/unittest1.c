@@ -4,8 +4,15 @@
 #include <assert.h>
 #include "rngs.h"
 
-// Returns 1 if true and 0 if false
-int checkTrue(int x, int y, char* desc) {
+// Prints out the description formatted with asterisks around it
+void printFormatted(char* desc) {
+	printf("**************************************************************\n");
+	printf("%s\n", desc);
+	printf("**************************************************************\n");
+}
+
+// Prints PASSED if true and FAILED if false. Alos prints the passed in description
+void checkTrue(int x, int y, char* desc) {
 	if (x == y) {
 		printf("PASSED - %s\n", desc);
 	}
@@ -38,7 +45,6 @@ int main () {
     }
     // Switch variables so test should pass
     choice1 = 1;
-    state.hand[currentPlayer][4] = estate; // Set one of the cards to be an estate
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
 
@@ -46,7 +52,7 @@ int main () {
     doBaron(currentPlayer, choice1, &state);
 
     // Do tests
-    printf("%d\n", state.coins);
+    printFormatted("SUBTEST 1 - Check for Estate Card in Hand With All Estate Hand");
     checkTrue(state.numBuys, 2, "Buys Increased By 1"); // This will Fail because of my bug
     checkTrue(state.coins, 4, "Coins Increased By 4");
     checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased By 1");
@@ -74,7 +80,7 @@ int main () {
     doBaron(currentPlayer, choice1, &state);
 
     // Do tests
-    printf("%d\n", state.coins);
+    printFormatted("SUBTEST 2 - Check for Estate at Index 0 of Hand");
     checkTrue(state.coins, 4, "Coins Increased By 4"); // This will fail because of my bug
     checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased By 1");
     checkTrue(state.handCount[currentPlayer], 4, "Hand Count Decreased By 1"); // This will fail because of my bug
@@ -99,6 +105,7 @@ int main () {
     doBaron(currentPlayer, choice1, &state);
 
     // Do tests
+    printFormatted("SUBTEST 3 - No Estate Card Found in Hand");
     checkTrue(state.supplyCount[estate], 0, "Estate Supply decreased by 1"); // Should be 0
     checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased by 1"); // Should be 1
 
