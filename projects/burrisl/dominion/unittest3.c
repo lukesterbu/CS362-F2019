@@ -152,7 +152,7 @@ int main(int argc, char** argv) {
     state.hand[currentPlayer][3] = gold;
     state.hand[currentPlayer][4] = baron;
     choice1 = 2;
-    choice2 = 0;
+    choice2 = 1;
     state.coins = 0;
     state.discardCount[otherPlayer] = 0;
     state.discardCount[currentPlayer] = 0;
@@ -166,7 +166,7 @@ int main(int argc, char** argv) {
     // Call the function being tested and test
     checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 1), 0, "Function Should Return 0");
     printf("%d\n", state.supplyCount[tempCard]);
-    checkTrue(state.supplyCount[tempCard], 11, "Supply Count Should Increase By 1.");
+    checkTrue(state.supplyCount[tempCard], 10, "Supply Count Should Stay the Same.");
     checkTrue(state.discardCount[otherPlayer], 0, "Other Player Discard Count Should Increase By 1.");
     checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Should Decrease By 1.");
 
