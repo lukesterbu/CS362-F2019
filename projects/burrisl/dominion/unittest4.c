@@ -93,7 +93,35 @@ int main(int argc, char** argv) {
     doTribute(currentPlayer, otherPlayer, tributeRevealedCards, choice1, choice2, &state, 0);
 
     // Do tests
-    printFormatted("SUBTEST 1 - state->discardCount[nextPlayer] > 0.");
+    printFormatted("SUBTEST 2 - state->discardCount[nextPlayer] > 0.");
     checkTrue(state.deckCount[otherPlayer], 0, "Other Player Discard Count Decreases by 1");
+
+    /***************************************************************************************
+    ** else {}
+    ***************************************************************************************/
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    r = initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    choice1 = 0;
+    choice2 = 3;
+    state.coins = 0;
+    state.discardCount[currentPlayer] = 4;
+    state.deckCount[otherPlayer] = 0;
+    tributeRevealedCards[0] = 0;
+    tributeRevealedCards[1] = 1;
+
+    doTribute(currentPlayer, otherPlayer, tributeRevealedCards, choice1, choice2, &state, 0);
+
+    // Do tests
+    printFormatted("SUBTEST 3 - else{}.");
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Discard Count Decreases by 1");
+
 	return 0;
 }
