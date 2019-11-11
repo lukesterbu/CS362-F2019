@@ -161,13 +161,13 @@ int main(int argc, char** argv) {
     int tempCard = state.hand[currentPlayer][choice1];
     state.supplyCount[tempCard] = 10;
 
-    // Call the function being tested;
-    printf("%d\n", doAmbassador(currentPlayer, choice1, choice2, &state, 1));
-
     // Do tests
     printFormatted("SUBTEST 5 - Rest of Code.");
+    // Call the function being tested and test
+    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 1), 0, "Function Should Return 0");
     checkTrue(state.supplyCount[tempCard], 10, "Supply Count Should Stay 10.");
-    checkTrue(state.discardCount[otherPlayer], 1, "Other Player Discard Count Should Increase By 1.");
-    checkTrue(state.handCount[currentPlayer], 3, "Current Player Hand Count Should Decrease By 2.");
+    checkTrue(state.discardCount[otherPlayer], 0, "Other Player Discard Count Should Increase By 1.");
+    checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Should Decrease By 1.");
+    checkTrue()
 	return 0;
 }
