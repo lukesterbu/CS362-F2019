@@ -65,7 +65,7 @@ int main () {
 
     // Switch variables so test should pass
     choice1 = 0;
-    state.supplyCount[estate] = 2; // Set to 1 since it will be decremented and then checked if = 0
+    state.supplyCount[estate] = 1; // Set to 1 since it will be decremented and then checked if = 0
     state.discardCount[currentPlayer] = 0;
 
     // Call the function being tested;
