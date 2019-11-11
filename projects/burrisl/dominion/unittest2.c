@@ -1,49 +1,69 @@
+/**************************************************************************
+** Author: 		Luke Burris
+** Description:	Tests the doMinion() function using my checkTrue function()
+**************************************************************************/
 #include "dominion.h"
 #include "rngs.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char** argv) {
-	// Unit test for Minion
-	// set your card array
-	int k[10] = { adventurer, council_room, feast, gardens, mine
-	, remodel, smithy, village, baron, great_hall };
-	// declare the game state
-	struct gameState G;
-	// declare the arrays
-	int coppers[MAX_HAND];
-	int silvers[MAX_HAND];
-	int golds[MAX_HAND];
-	printf("Begin Testing someFunction():\n");
-	
-	// set the state of your variables
-	// comment on what this is going to test
-	
-	memset(&G, 23, sizeof(struct gameState)); // set the game state
-	r = initializeGame(2, k, seed, &G); // initialize a new game
-	G.handCount[p] = handCount; // set any other variables
-	memcpy(G.hand[p], coppers, sizeof(int) * handCount);
-	// call the refactored function
-	myrefactoredfunction(p, &G, bonus);
-	// verify that your asserts pass, for the bugs your asserts may fail
-	assert(G.coins == something); // check a condition
-	assert(some condition);
-	assert(some condition);
+// Prints out the description formatted with asterisks around it
+void printFormatted(char* desc) {
+	printf("**************************************************************\n");
+	printf("%s\n", desc);
+	printf("**************************************************************\n");
+}
 
-	// adjust the state of your variables to continue testing the function
-	// comment on what this is going to test
-	
-	memset(&G, 0, sizeof(struct gameState)); // set the game state
-	r = initializeGame(3, k, seed, &G); // initialize a new game
-	G.handCount[p] = handCount; // set any other variables
-	memcpy(G.hand[p], silvers, sizeof(int) * handCount);
-	// call the refactored function again
-	myrefactoredfunction(p, &G, bonus);
-	// verify that your asserts pass, for the bugs your asserts may fail
-	assert(G.coins == something); // check a condition
-	assert(some condition);
-	assert(some condition);
-	printf("Test completed!\n");
-	
-	return 0;
+// Prints PASSED if true and FAILED if false. Alos prints the passed in description
+void checkTrue(int x, int y, char* desc) {
+	if (x == y) {
+		printf("PASSED - %s\n", desc);
+	}
+	else {
+		printf("FAILED - %s\n", desc);
+	}
+}
+
+int main(int argc, char** argv) {
+    int r;
+    int choice1;
+    int choice2;
+    // This is a real value
+    int numPlayers = 2;
+    int currentPlayer = 0;
+    
+    int k[10] = {adventurer, council_room, feast, gardens, mine,
+        remodel, smithy, village, baron, great_hall};
+
+    struct gameState state;
+
+    printf("\n\n");
+    printFormatted("UNITTEST2 - doMinion()");
+    /***************************************************************************************
+    ** choice1 = 1
+    ***************************************************************************************/
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    r = initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    choice1 = 1;
+    choice2 = 0;
+    state.coins = 0;
+    state.discardCount[currentPlayer] = 0;
+
+    // Call the function being tested;
+    doMinion(currentPlayer, choice1, choice2, &state, 0);
+
+    // Do tests
+    printFormatted("SUBTEST 1 - choice1 = 1. Check for Estate Card in Hand With All Estate Hand.");
+    checkTrue(state.numActions, 2, "Number of Actions Increase by 1.");
+    checkTrue(state.coins, 2, "Coins Increase by 2.");
+	/***************************************************************************************
+    ** choice2 = 1
+    ***************************************************************************************/
 }

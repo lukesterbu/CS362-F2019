@@ -1,3 +1,7 @@
+/**************************************************************************
+** Author: 		Luke Burris
+** Description:	Tests the doBaron() function using my checkTrue function()
+**************************************************************************/
 #include "dominion.h"
 #include <string.h>
 #include <stdio.h>
@@ -32,7 +36,9 @@ int main () {
         remodel, smithy, village, baron, great_hall};
 
     struct gameState state;
-    
+
+    printf("\n\n");
+    printFormatted("UNITTEST1 - doBaron()");
     /***************************************************************************************
     ** Test to see if an estate card is found in the hand when choice1 > 0
     ***************************************************************************************/
@@ -128,7 +134,7 @@ int main () {
     doBaron(currentPlayer, choice1, &state);
 
     // Do tests
-    printFormatted("SUBTEST 4 - Choice1 = 0.");
+    printFormatted("SUBTEST 4 - choice1 = 0.");
     checkTrue(state.supplyCount[estate], 0, "Estate Supply decreased by 1."); // Should be 0
     checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased by 1."); // Should be 1
 
