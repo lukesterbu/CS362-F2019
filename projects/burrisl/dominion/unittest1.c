@@ -31,7 +31,7 @@ int main () {
     ***************************************************************************************/
     // Standard setup
     memset(&state, 23, sizeof(struct gameState));
-    r = initializeGame(2, k, 618, &state);
+    r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
     	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
@@ -57,7 +57,7 @@ int main () {
     ***************************************************************************************/
     // Standard setup
     memset(&state, 23, sizeof(struct gameState));
-    r = initializeGame(2, k, 618, &state);
+    r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
     	state.hand[currentPlayer][i] = copper;

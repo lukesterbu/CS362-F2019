@@ -1034,6 +1034,7 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
         while(card_not_discarded) {
             if (state->hand[currentPlayer][selectedCard] == estate) { //Found an estate card!
                 state->coins += 4; //Add 4 coins to the amount of coins
+                printf("doBaron coins - %d\n", state->coins);
                 state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][selectedCard];
                 state->discardCount[currentPlayer]++;
                 //Set each card slot equal to the next card to account for the discarded card
