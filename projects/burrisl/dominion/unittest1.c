@@ -37,7 +37,7 @@ int main () {
     	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
     }
     // Switch variables so test should pass
-    choice1 = 0;
+    choice1 = 1;
     state.hand[currentPlayer][4] = estate; // Set one of the cards to be an estate
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
@@ -64,7 +64,7 @@ int main () {
     }
 
     // Switch variables so test should pass
-    choice1 = 0;
+    choice1 = 1;
     state.supplyCount[estate] = 1; // Set to 1 since it will be decremented and then checked if = 0
     state.discardCount[currentPlayer] = 0;
 
