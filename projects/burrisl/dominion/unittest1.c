@@ -37,7 +37,6 @@ int main () {
 
     struct gameState state;
 
-    printf("\n\n");
     printFormatted("UNITTEST1 - doBaron()");
     /***************************************************************************************
     ** Test to see if an estate card is found in the hand when choice1 > 0
