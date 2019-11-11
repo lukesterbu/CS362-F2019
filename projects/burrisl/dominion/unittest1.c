@@ -65,12 +65,15 @@ int main () {
 
     // Switch variables so test should pass
     choice1 = 0;
+    state.supplyCount[estate] = 2; // Set to 1 since it will be decremented and then checked if = 0
+    state.discardCount[currentPlayer] = 0;
 
     // Call the function being tested;
     doBaron(currentPlayer, choice1, &state);
 
     // Do tests
-    checkTrue(state.supplyCount[estate], 7, "Estate Supply decreased by 1"); // Should be one less than 8 since 2 players
+    checkTrue(state.supplyCount[estate], 0, "Estate Supply decreased by 1"); // Should be 0
+    checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased by 1";) // Should be 1
 
     return 0;
 }
