@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 1 - state->hand[currentPlayer][choice1] < copper.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
 	
     /***************************************************************************************
     ** state->hand[currentPlayer][choice1] > gold]
@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 2 - state->hand[currentPlayer][choice1] > gold.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
     
     /***************************************************************************************
     ** choice 2 > treasure_map
@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 3 - choice2 > treasure_map.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
 
     /***************************************************************************************
     ** choice 2 < curse
@@ -123,7 +123,7 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 4 - choice2 < curse.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
 
     /***************************************************************************************
     ** (getCost(state->hand[currentPlayer][choice1] + 3) > getCost(choice2)
@@ -144,6 +144,30 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 5 - (getCost(state->hand[currentPlayer][choice1] + 3) > getCost(choice2).");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+	
+    /***************************************************************************************
+    ** Rest of Code
+    ***************************************************************************************/
+    // Standard Province setup
+    memset(&state, 23, sizeof(struct gameState));
+    r = initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+    	state.hand[currentPlayer][i] = province; // Set all of the cards to province
+    }
+
+    // Switch variables so test should pass
+    choice1 = 0;
+    choice2 = 0;
+    state.coins = 0;
+    state.discardCount[currentPlayer] = 0;
+
+    // Call the function
+    doMine(currentPlayer, choice1, choice2, &state, 0);
+
+    // Do tests
+    printFormatted("SUBTEST 6 - Rest of Code.");
+    checkTrue(state.handCount[currentPlayer], 5, "Current Player Hand Count Shouldn't Change")
 	return 0;
 }
