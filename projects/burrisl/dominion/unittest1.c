@@ -46,6 +46,7 @@ int main () {
     doBaron(currentPlayer, choice1, &state);
 
     // Do tests
+    printf("%d\n", state.coins);
     checkTrue(state.coins, 4, "Coins Increased By 4");
     checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased By 1");
     checkTrue(state.handCount[currentPlayer], 4, "Hand Count Decreased By 1");
