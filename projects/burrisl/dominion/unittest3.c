@@ -144,15 +144,15 @@ int main(int argc, char** argv) {
     memset(&state, 23, sizeof(struct gameState));
     r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
-    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = copper; // Set all of the cards to estates
-    }
 
     // Switch variables so test should pass
+    state.hand[currentPlayer][0] = copper;
     state.hand[currentPlayer][1] = estate;
     state.hand[currentPlayer][2] = silver;
-    choice1 = 1;
-    choice2 = 1;
+    state.hand[currentPlayer][3] = gold;
+    state.hand[currentPlayer][4] = baron;
+    choice1 = 0;
+    choice2 = 2;
     state.coins = 0;
     state.discardCount[otherPlayer] = 0;
     state.discardCount[currentPlayer] = 0;
@@ -162,7 +162,7 @@ int main(int argc, char** argv) {
     state.supplyCount[tempCard] = 10;
 
     // Call the function being tested;
-    doAmbassador(currentPlayer, choice1, choice2, &state, 2);
+    doAmbassador(currentPlayer, choice1, choice2, &state, 1);
 
     // Do tests
     printFormatted("SUBTEST 5 - Rest of Code.");
