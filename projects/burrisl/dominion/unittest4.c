@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
     int numPlayers = 2;
     int currentPlayer = 0;
     int otherPlayer = 1;
+    int tributeRevealedCards[2];
     
     int k[10] = {adventurer, council_room, feast, gardens, mine,
         remodel, smithy, village, baron, great_hall};
@@ -42,7 +43,8 @@ int main(int argc, char** argv) {
     printFormatted("UNITTEST4 - doTribute()");
 	
     /***************************************************************************************
-    ** choice2 > 2. This will fail due to my bug
+    ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
+    ** state->deckCount[nextPlayer] > 0
     ***************************************************************************************/
     // Standard Estate setup
     memset(&state, 23, sizeof(struct gameState));
@@ -57,9 +59,14 @@ int main(int argc, char** argv) {
     choice2 = 3;
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
+    state.deckCount[otherPlayer] = 1;
+    tributeRevealedCards[0] = 0;
+    tributeRevealedCards[1] = 1;
+
+    doTribute(currentPlayer, otherPlayer, tributeRevealedCards, choice1, choice2, &state, 0);
 
     // Do tests
     printFormatted("SUBTEST 1 - choice2 = 3.");
-    checkTrue(doTribute(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
 	return 0;
 }
