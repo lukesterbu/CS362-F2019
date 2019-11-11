@@ -168,6 +168,6 @@ int main(int argc, char** argv) {
     checkTrue(state.supplyCount[tempCard], 10, "Supply Count Should Stay 10.");
     checkTrue(state.discardCount[otherPlayer], 0, "Other Player Discard Count Should Increase By 1.");
     checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Should Decrease By 1.");
-    checkTrue()
+
 	return 0;
 }
