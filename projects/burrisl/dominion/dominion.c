@@ -1170,6 +1170,7 @@ int doAmbassador(int currentPlayer, int choice1, int choice2, struct gameState *
             }
         }
     }
+    printf("%d\n", state->handCount[currentPlayer]);
     return 0;
 }
 
