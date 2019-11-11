@@ -151,8 +151,8 @@ int main(int argc, char** argv) {
     state.hand[currentPlayer][2] = silver;
     state.hand[currentPlayer][3] = gold;
     state.hand[currentPlayer][4] = baron;
-    choice1 = 0;
-    choice2 = 2;
+    choice1 = 2;
+    choice2 = 0;
     state.coins = 0;
     state.discardCount[otherPlayer] = 0;
     state.discardCount[currentPlayer] = 0;
