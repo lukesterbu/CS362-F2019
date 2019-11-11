@@ -73,7 +73,7 @@ int main () {
 
     // Do tests
     checkTrue(state.supplyCount[estate], 0, "Estate Supply decreased by 1"); // Should be 0
-    checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased by 1";) // Should be 1
+    checkTrue(state.discardCount[currentPlayer], 1, "Discard Count Increased by 1"); // Should be 1
 
     return 0;
 }
