@@ -165,6 +165,7 @@ int main(int argc, char** argv) {
     printFormatted("SUBTEST 5 - Rest of Code.");
     // Call the function being tested and test
     checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 1), 0, "Function Should Return 0");
+    printf("%d\n", state.supplyCount[tempCard]);
     checkTrue(state.supplyCount[tempCard], 11, "Supply Count Should Increase By 1.");
     checkTrue(state.discardCount[otherPlayer], 0, "Other Player Discard Count Should Increase By 1.");
     checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Should Decrease By 1.");
