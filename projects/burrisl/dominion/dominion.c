@@ -1027,7 +1027,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 // Assignment 2 function
 void doBaron(int currentPlayer, int choice1, struct gameState *state)
 {
-    state->numBuys = state->numBuys + 2; //Increase buys by 2 instead of 1 **BUG**
+    state->numBuys = state->numBuys + 1; //Increase buys by 2 instead of 1 **BUG**
     if (choice1 > 0) { //Boolean true or going to discard an estate
         int selectedCard = 1; //Iterator for hand! Start at 1 instead of 0 **BUG**
         int card_not_discarded = 1; //Flag for discard set!
