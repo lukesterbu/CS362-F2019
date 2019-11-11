@@ -131,6 +131,7 @@ int main(int argc, char** argv) {
     state.discardCount[currentPlayer] = 0;
 
     // Store this for later since it will get changed once doAmbassador is called
+    int tempCard = state.hand[currentPlayer][choice1];
     state.supplyCount[state.hand[currentPlayer][choice1]] = 10;
 
     // Call the function being tested;
