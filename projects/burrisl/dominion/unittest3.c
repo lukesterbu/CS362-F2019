@@ -121,10 +121,11 @@ int main(int argc, char** argv) {
     r = initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    	state.hand[currentPlayer][i] = copper; // Set all of the cards to estates
     }
 
     // Switch variables so test should pass
+    state.hand[currentPlayer][1] = estate;
     choice1 = 1;
     choice2 = 1;
     state.coins = 0;
