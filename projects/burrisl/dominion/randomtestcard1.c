@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <assert.h>
 #include "rngs.h"
+#include <stdlib.h>
+#include <time.h>
 
 // Prints out the description formatted with asterisks around it
 void printFormatted(char* desc) {
@@ -36,6 +38,10 @@ int main() {
         remodel, smithy, village, baron, great_hall};
 
     struct gameState state;
+    // Seed the random number generator
+    srand(time(NULL));
+
+    // NEED TO EDIT FROM BELOW HERE
 
     printFormatted("UNITTEST1 - doBaron()");
     /***************************************************************************************
