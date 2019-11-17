@@ -119,6 +119,7 @@ int main() {
 
     clock_t end_t = clock();
     clock_t total_t = (float)(end_t - start_t) / CLOCKS_PER_SEC;
+    printf("Clock Ticks: %ld\n", end_t);
     printf("Time Taken to Execute %d Iterations: %f\n", iterations, total_t);
 
     printFormatted("RANDOM TEST 1 COMPLETED - doBaron()");
