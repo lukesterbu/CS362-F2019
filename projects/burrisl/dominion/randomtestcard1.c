@@ -104,6 +104,8 @@ int main() {
 
         // Player chooses to discard an estate and has one in their hand
         if (choice1 > 0 && numOldEstatesInHand > 0) {
+            printf("Number of Old Estates: %d\n", numOldEstatesInHand);
+            printf("Number of New Estates: %d\n", numNewEstatesInHand);
             checkTrue(numOldEstatesInHand - 1, numNewEstatesInHand, "Estate was Discarded");
             checkTrue(numCoinsBefore + 4, state.coins, "Coins Incremented By 4");
         }
