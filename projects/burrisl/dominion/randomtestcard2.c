@@ -71,8 +71,11 @@ int main() {
             state.hand[currentPlayer][card] = rand() % (treasure_map + 1);
         }
 
+        printf("Hand Count Before: %d", state.handCount[currentPlayer]);
         // Gain a minion card
         gainCard(minion, &state, TO_HAND, currentPlayer);
+        
+        printf("Hand Count After: %d", state.handCount[currentPlayer]);
 
         // Get variable snapshots
         numCoinsBefore = state.coins;
@@ -81,8 +84,9 @@ int main() {
         choice1 = rand() % 2; // Get a random choice1
         choice2 = rand() % 2; // Get a random choice2
 
-        // Call doBaron()
-        doMinion(currentPlayer, choice1, &state);
+        // Call doMinion()
+        doMinion(currentPlayer, choice1, choice2, &state, state.handCount[currentPlayer]);
+
 
         checkTrue(state.numActions, 2, "Number of Actions Equals 2");
         checkTrue(handSizeBefore - 1, state.handCount[currentPlayer], "Hand Size Decreased By 1");
