@@ -25,7 +25,7 @@ void printFormatted(char* desc) {
 // Prints PASSED if true and FAILED if false. Also prints the passed in description
 void checkTrue(int x, int y, char* desc) {
     if (x == y) {
-        //printf("PASSED - %s\n", desc);
+        printf("PASSED - %s\n", desc);
     }
     else {
         printf("FAILED - %s\n", desc);
@@ -83,9 +83,6 @@ int main() {
             tributeRevealedCards[card] = rand() % (treasure_map + 1);
         }
 
-        printf("Card 1: %d\n", tributeRevealedCards[0]);
-        printf("Card 2: %d\n", tributeRevealedCards[1]);
-
         // Get variable snapshots
         numActionsBefore = state.numActions;
         numCoinsBefore = state.coins;
@@ -114,10 +111,6 @@ int main() {
             }
             card++;
         }
-
-        printf("Action Cards: %d\n", numActionCards);
-        printf("Actions Before: %d\n", numActionsBefore);
-        printf("Actions After: %d\n", state.numActions);
 
         checkTrue(numActionsBefore + (2 * numActionCards), state.numActions, "Actions Are Correct");
         checkTrue(numCoinsBefore + (2 * numTreasureCards), state.coins, "Coins Are Correct");
