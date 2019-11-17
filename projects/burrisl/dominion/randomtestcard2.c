@@ -83,7 +83,13 @@ int main() {
         handSizeBeforeOther = state.handCount[otherPlayer];
 
         choice1 = rand() % 2; // Get a random choice1
-        choice2 = rand() % 2; // Get a random choice2
+        // choice2 conditional on the random assignment of choice1
+        if (choice1 > 0) {
+            choice2 = 0;
+        }
+        else {
+            choice2 = 1;
+        }
 
         // Call doMinion()
         doMinion(currentPlayer, choice1, choice2, &state, state.handCount[currentPlayer]);
