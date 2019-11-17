@@ -83,7 +83,7 @@ int main() {
             }
         }
 
-        numOrigTotalCards = fullDeckCount(currentPlayer, &state);
+        numOrigTotalCards = fullDeckCount(currentPlayer, baron, &state);
         numCoinsBefore = updateCoins(currentPlayer, &state, 0); // Last parameter is bonus
         estateSupply = supplyCount(estate, &state);
 
