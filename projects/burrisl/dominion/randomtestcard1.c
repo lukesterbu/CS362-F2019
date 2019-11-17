@@ -43,7 +43,6 @@ int main() {
 
     int numOrigTotalCards = 0;
     int numCoinsBefore = 0;
-    int numCoinsAfter = 0;
     int success = 0;
     // Choice variables
     int choice1 = 0;
@@ -54,9 +53,7 @@ int main() {
 
     // Seed the random number generator
     srand(time(NULL));
-    // Initialize the Game
-    memset(&state, 23, sizeof(struct gameState));
-    initializeGame(numPlayers, k, 618, &state);
+ 
     // Print out title of test
     printFormatted("RANDOM TEST 1 - doBaron()");
 
@@ -65,6 +62,10 @@ int main() {
     int iterations = 10;
 
     while (currIter < iterations) {
+        // Initialize the Game
+        memset(&state, 23, sizeof(struct gameState));
+        initializeGame(numPlayers, k, 618, &state);
+
         // Randomly set the size of the hand
         state.handCount[currentPlayer] = rand() % 10;
 
@@ -84,16 +85,15 @@ int main() {
         }
 
         numOrigTotalCards = fullDeckCount(currentPlayer, baron, &state);
-        numCoinsBefore = updateCoins(currentPlayer, &state, 0); // Last parameter is bonus
+        numCoinsBefore = state.coins;
         estateSupply = supplyCount(estate, &state);
 
         choice1 = rand() % 2; // Get a random choice1
         // Play the baron card
         success = playCard(numHandCards(&state) - 1, choice1, choice2, choice3, &state);
-        numCoinsAfter = updateCoins(currentPlayer, &state, 0);
 
         checkTrue(success, 0, "Card was Played Successfully");
-        checkTrue(state.numBuys, 3, "Number of Buys Equals 2"); // This should fail because of my bug
+        checkTrue(state.numBuys, 2, "Number of Buys Equals 2"); // This should fail every time because of my bug
 
         // Check how many estate cards are in the player's hand
         for (int card = 0; card < numHandCards(&state); card++) {
@@ -102,25 +102,17 @@ int main() {
             }
         }
 
-        endTurn(&state);
-
         // Player chooses to discard an estate and has one in their hand
-        if (choice1 == 1 && numOldEstatesInHand > 0) {
-            checkTrue(numNewEstatesInHand, numOldEstatesInHand - 1, "Estate was Discarded");
-            checkTrue(numCoinsAfter, numCoinsBefore + 4, "Coins Incremented By 4");
-            checkTrue(numOrigTotalCards, fullDeckCount(currentPlayer, baron, &state), "Baron Card Count Correct");
+        if (choice1 > 0 && numOldEstatesInHand > 0) {
+            checkTrue(numOldEstatesInHand - 1, numNewEstatesInHand, "Estate was Discarded");
+            checkTrue(numCoinsBefore + 4, state.coins, "Coins Incremented By 4");
         }
         // Player chooses to discard an estate but doesn't have any in their hand
-        else if (choice1 == 1 && numOldEstatesInHand == 0) {
-            checkTrue(estateSupply - 1, supplyCount(estate, &state), "Estate Supply Decremented When None in Hand");
-            checkTrue(numCoinsBefore, numCoinsAfter, "Coins are the Same After Gaining an Estate");
-            checkTrue(numOrigTotalCards + 1, fullDeckCount(currentPlayer, baron, &state), "Baron Card Count Correct");
-        }
+        // OR
         // Player did not want to discard an estate
         else {
-            checkTrue(estateSupply - 1, supplyCount(estate, &state), "Estate Supply Not Changed");
-            checkTrue(numCoinsBefore, numCoinsAfter, "Coins are the Same After Gaining an Estate");
-            checkTrue(numOrigTotalCards + 1, fullDeckCount(currentPlayer, baron, &state), "Baron Card Count Correct");
+            checkTrue(estateSupply - 1, supplyCount(estate, &state), "Estate Supply Decremented");
+            checkTrue(numCoinsBefore, state.coins, "Coins are the Same After Gaining an Estate");
         }
 
         currIter++; // Increment Iterator
