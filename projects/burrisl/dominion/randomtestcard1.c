@@ -50,6 +50,8 @@ int main() {
     int currIter = 0;
     int iterations = 10000;
 
+    printf("Start Time: %ld\n", clock());
+
     while (currIter < iterations) {
         // Estate Variables
         int numOldEstatesInHand = 0;
@@ -115,6 +117,7 @@ int main() {
         currIter++; // Increment Iterator
     }
 
+    printf("End Time: %ld\n", clock());
     printFormatted("RANDOM TEST 1 COMPLETED - doBaron()");
 
     return 0;
