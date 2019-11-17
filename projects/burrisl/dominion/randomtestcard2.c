@@ -71,11 +71,11 @@ int main() {
             state.hand[currentPlayer][card] = rand() % (treasure_map + 1);
         }
 
-        printf("Hand Count Before: %d", state.handCount[currentPlayer]);
+        printf("Hand Count Before: %d\n", state.handCount[currentPlayer]);
         // Gain a minion card
         gainCard(minion, &state, TO_HAND, currentPlayer);
 
-        printf("Hand Count After: %d", state.handCount[currentPlayer]);
+        printf("Hand Count After: %d\n", state.handCount[currentPlayer]);
 
         // Get variable snapshots
         numCoinsBefore = state.coins;
