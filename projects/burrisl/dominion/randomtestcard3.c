@@ -113,7 +113,7 @@ int main() {
 
         checkTrue(numActionsBefore + (2 * numActionCards), state.numActions, "Actions Are Correct");
         checkTrue(numCoinsBefore + (2 * numTreasureCards), state.coins, "Coins Are Correct");
-        chcekTrue(handSizeBefore + (2 * numVictoryCards), state.handCount[currentPlayer], "Hand Count is Correct");
+        checkTrue(handSizeBefore + (2 * numVictoryCards), state.handCount[currentPlayer], "Hand Count is Correct");
 
         currIter++; // Increment Iterator
     }
