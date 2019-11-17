@@ -1050,23 +1050,21 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
                     printf("Must gain an estate if there are any\n");
                 }
                 if (supplyCount(estate, state) > 0) {
-                    gainCard(estate, state, 0, currentPlayer);
-                    state->supplyCount[estate]--; //Decrement estates
+                    gainCard(estate, state, 0, currentPlayer); // Gain an estate
                     if (supplyCount(estate, state) == 0) {
                         isGameOver(state);
                     }
                 }
-                card_not_discarded = 0; //Exit the loop
+                card_not_discarded = 0; // Exit the loop
             }
             else {
-                selectedCard++; //Next card
+                selectedCard++; // Next card
             }
         }
     }
     else {
         if (supplyCount(estate, state) > 0) {
-            gainCard(estate, state, 0, currentPlayer);//Gain an estate
-            state->supplyCount[estate]--;//Decrement Estates
+            gainCard(estate, state, 0, currentPlayer); // Gain an estate
             if (supplyCount(estate, state) == 0) {
                 isGameOver(state);
             }
