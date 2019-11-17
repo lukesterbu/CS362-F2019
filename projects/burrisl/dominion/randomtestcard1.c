@@ -43,11 +43,8 @@ int main() {
 
     int numOrigTotalCards = 0;
     int numCoinsBefore = 0;
-    int success = 0;
     // Choice variables
     int choice1 = 0;
-    int choice2 = 0;
-    int choice3 = 0;
     // Supply piles
     int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
 
@@ -89,10 +86,10 @@ int main() {
         estateSupply = supplyCount(estate, &state);
 
         choice1 = rand() % 2; // Get a random choice1
-        // Play the baron card
-        success = playCard(numHandCards(&state) - 1, choice1, choice2, choice3, &state);
 
-        checkTrue(success, 0, "Card was Played Successfully");
+        // Call doBaron()
+        doBaron(currentPlayer, choice1, &state);
+
         checkTrue(state.numBuys, 2, "Number of Buys Equals 2"); // This should fail every time because of my bug
 
         // Check how many estate cards are in the player's hand
