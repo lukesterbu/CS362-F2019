@@ -898,7 +898,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
-        doTribute(currentPlayer, nextPlayer, tributeRevealedCards, state, handPos);
+        doTribute(currentPlayer, nextPlayer, tributeRevealedCards, state);
         return 0;
 
     case ambassador:
@@ -1165,7 +1165,7 @@ void doAmbassador(int currentPlayer, int choice1, int choice2, struct gameState 
 }
 
 // Assignment 2 function
-void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, struct gameState *state, int handPos)
+void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, struct gameState *state)
 {
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
         if (state->deckCount[nextPlayer] > 0) {
