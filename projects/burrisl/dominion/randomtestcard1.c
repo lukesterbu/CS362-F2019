@@ -50,7 +50,7 @@ int main() {
     int currIter = 0;
     int iterations = 10000;
 
-    printf("Start Time: %ld\n", clock());
+    clock_t start_t = clock();
 
     while (currIter < iterations) {
         // Estate Variables
@@ -117,7 +117,10 @@ int main() {
         currIter++; // Increment Iterator
     }
 
-    printf("End Time: %ld\n", clock());
+    clock_t end_t = clock();
+    clock_t total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+    printf("Time Taken to Execute %d Iterations: %f\n", iterations, total_t);
+
     printFormatted("RANDOM TEST 1 COMPLETED - doBaron()");
 
     return 0;
