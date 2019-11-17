@@ -66,8 +66,10 @@ int main() {
         memset(&state, 23, sizeof(struct gameState));
         initializeGame(numPlayers, k, 618, &state);
 
-        // Randomly set the size of the hand
+        // Randomly set the size of different variables
         state.handCount[currentPlayer] = rand() % 10;
+        state.discardCount[otherPlayer] = rand() % 100;
+        state.deckCount[otherPlayer] = rand() % 100;
 
         // Add random cards to the hand
         for (int card = 0; card < state.handCount[currentPlayer]; card++) {

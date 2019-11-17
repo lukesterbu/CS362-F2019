@@ -1172,7 +1172,7 @@ void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, str
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             state->deckCount[nextPlayer]--;
         }
-        if (state->discardCount[nextPlayer] > 0) { // Should be else if **BUG**
+        else if (state->discardCount[nextPlayer] > 0) { // Should be else if **BUG**
             tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
             state->discardCount[nextPlayer]--;
         }
