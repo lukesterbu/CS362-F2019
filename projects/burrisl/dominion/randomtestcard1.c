@@ -92,8 +92,8 @@ int main() {
         success = playCard(numHandCards(&state) - 1, choice1, choice2, choice3, &state);
         numCoinsAfter = updateCoins(currentPlayer, &state, 0);
 
-        checkTrue(success, 0, "Check if Card was Played Successfully");
-        checkTrue(state.numBuys, 3, "Check if numBuys == 2"); // This should fail because of my bug
+        checkTrue(success, 0, "Card was Played Successfully");
+        checkTrue(state.numBuys, 3, "Number of Buys Equals 2"); // This should fail because of my bug
 
         // Check how many estate cards are in the player's hand
         for (int card = 0; card < numHandCards(&state); card++) {
@@ -103,6 +103,26 @@ int main() {
         }
 
         endTurn(&state);
+
+        // Player chooses to discard an estate and has one in their hand
+        if (choice1 == 1 && numOldEstatesInHand > 0) {
+            checkTrue(numNewEstatesInHand, numOldEstatesInHand - 1, "Estate was Discarded");
+            checkTrue(numCoinsAfter, numCoinsBefore + 4, "Coins Incremented By 4");
+            checkTrue(numOrigTotalCards, fullDeckCount(currentPlayer, baron, &state), "Baron Card Count Correct");
+        }
+        // Player chooses to discard an estate but doesn't have any in their hand
+        else if (choice1 == 1 && numOldEstatesInHand == 0) {
+            checkTrue(estateSupply - 1, supplyCount(estate, &state), "Estate Supply Decremented When None in Hand");
+            checkTrue(numCoinsBefore, numCoinsAfter, "Coins are the Same After Gaining an Estate");
+            checkTrue(numOrigTotalCards + 1, fullDeckCount(currentPlayer, baron, &state), "Baron Card Count Correct");
+        }
+        // Player did not want to discard an estate
+        else {
+            checkTrue(estateSupply - 1, supplyCount(estate, &state), "Estate Supply Not Changed");
+            checkTrue(numCoinsBefore, numCoinsAfter, "Coins are the Same After Gaining an Estate");
+            checkTrue(numOrigTotalCards + 1, fullDeckCount(currentPlayer, baron, &state), "Baron Card Count Correct");
+        }
+
         currIter++; // Increment Iterator
     }
 
