@@ -22,7 +22,7 @@ void printFormatted(char* desc) {
     printf("**************************************************************\n");
 }
 
-// Prints PASSED if true and FAILED if false. Alos prints the passed in description
+// Prints PASSED if true and FAILED if false. Also prints the passed in description
 void checkTrue(int x, int y, char* desc) {
     if (x == y) {
         printf("PASSED - %s\n", desc);
@@ -112,7 +112,7 @@ int main() {
         currIter++; // Increment Iterator
     }
 
-    printFormatted("RANDOM TEST 1 COMPLETED - doBaron()");
+    printFormatted("RANDOM TEST 2 COMPLETED - doMinion()");
 
     return 0;
 }

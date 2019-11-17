@@ -1071,12 +1071,12 @@ void doMinion(int currentPlayer, int choice1, int choice2, struct gameState *sta
     state->numActions++;
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
-    if (choice1) // Should be choice1 **BUG**
+    if (choice2) // Should be choice1 **BUG**
     {
         state->coins = state->coins + 2;
     }
     //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
-    else if (choice2) // Should be choice2 **BUG**
+    else if (choice1) // Should be choice2 **BUG**
     {
         //discard hand
         while(numHandCards(state) > 0)
@@ -1205,7 +1205,7 @@ void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, str
         state->playedCardCount++;
         tributeRevealedCards[1] = -1;
     }
-    for (int i = 0; i < 3; i ++) { // Should be i < 2 **BUG**
+    for (int i = 0; i < 3; i++) { // Should be i < 2 **BUG**
         // Treasure Card
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 2;

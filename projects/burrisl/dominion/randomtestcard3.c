@@ -39,7 +39,7 @@ int main() {
     int otherPlayer = 1;
 
     // Supply piles
-    int k[10] = {adventurer, council_room, feast, gardens, minion, remodel, smithy, village, baron, great_hall};
+    int k[10] = {adventurer, council_room, feast, tribute, minion, remodel, smithy, village, baron, great_hall};
 
     // Seed the random number generator
     srand(time(NULL));
@@ -54,11 +54,12 @@ int main() {
     while (currIter < iterations) {
         // Variable declarations
         int numCoinsBefore = 0;
-        int handSizeBeforeCurrent = 0;
-        int handSizeBeforeOther = 0;
-        // Choice variables
-        int choice1 = 0;
-        int choice2 = 0;
+        int handSizeBefore = 0;
+        int numActionsBefore = 0;
+        int numTreasureCards = 0;
+        int numVictoryCards = 0;
+        int numActionCards = 0;
+        int tributeRevealedCards[2];
 
         printf("** ITERATION %d **\n", currIter + 1);
         // Initialize the Game
@@ -74,45 +75,50 @@ int main() {
             state.hand[currentPlayer][card] = rand() % (treasure_map + 1);
         }
 
-        // Gain a minion card
-        gainCard(minion, &state, TO_HAND, currentPlayer);
+        // Gain a tribute card
+        gainCard(tribute, &state, TO_HAND, currentPlayer);
+
+        for (int card = 0; card < 2; card++) {
+            tributeRevealedCards[card] = rand() % (treasure_map + 1);
+        }
 
         // Get variable snapshots
         numCoinsBefore = state.coins;
-        handSizeBeforeCurrent = state.handCount[currentPlayer];
-        handSizeBeforeOther = state.handCount[otherPlayer];
-
-        choice1 = rand() % 2; // Get a random choice1
-        // choice2 conditional on the random assignment of choice1
-        if (choice1 > 0) {
-            choice2 = 0;
-        }
-        else {
-            choice2 = 1;
-        }
+        handSizeBefore = state.handCount[currentPlayer];
+        numActionsBefore = state.numActions;
 
         // Call doMinion()
-        doTribute(currentPlayer, choice1, choice2, &state, state.handCount[currentPlayer]);
+        doTribute(currentPlayer, otherPlayer, tributeRevealedCards, &state, state.handCount[currentPlayer]);
 
-        checkTrue(state.numActions, 2, "Number of Actions Equals 2");
-
-        // Player chooses gain 2 coins
-        if (choice1 > 0) {
-            checkTrue(handSizeBeforeCurrent - 1, state.handCount[currentPlayer], "Hand Size Decreased By 1");
-            checkTrue(numCoinsBefore + 2, state.coins, "Coins Increased By 2");
-        }
-        // Player selects other choice
-        else {
-            checkTrue(4, state.handCount[currentPlayer], "Current Player's Hand Size is Now 4");
-            // Only need to run this test if other player had more than 5 cards in their hand
-            if (handSizeBeforeOther > 4) {
-                checkTrue(4, state.handCount[otherPlayer], "Other Player's Hand Size is Now 4");
+        int dupFlag = 1;
+        int card = 0;
+        while (dupFlag == 1 && card < 2) {
+            if (tributeRevealedCards[0] == tributeRevealedCards[1]) {
+                dupFlag = 0;
             }
+            // Treasure Card
+            if (tributeRevealedCards[card] == copper || tributeRevealedCards[card] == silver || tributeRevealedCards[card] == gold) {
+                numTreasureCards++;
+            }
+            // Victory Card
+            else if (tributeRevealedCards[card] == estate || tributeRevealedCards[card] == duchy || tributeRevealedCards[card] == province || tributeRevealedCards[card] == gardens || tributeRevealedCards[card] == great_hall) {
+                numVictoryCards++;
+            }
+            // Action Card
+            else {
+                numActionCards++;
+            }
+            card++;
         }
+
+        checkTrue(numActionsBefore + (2 * numActionCards), state.numActions, "Actions Are Correct");
+        checkTrue(numCoinsBefore + (2 * numTreasureCards), state.coins, "Coins Are Correct");
+        chcekTrue(handSizeBefore + (2 * numVictoryCards), state.handCount[currentPlayer], "Hand Count is Correct");
+
         currIter++; // Increment Iterator
     }
 
-    printFormatted("RANDOM TEST 1 COMPLETED - doBaron()");
+    printFormatted("RANDOM TEST 3 COMPLETED - doTribute()");
 
     return 0;
 }
