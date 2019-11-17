@@ -111,6 +111,7 @@ int main() {
             card++;
         }
 
+        printf("Action Cards: %d\n", numActionCards);
         printf("Actions Before: %d\n", numActionsBefore);
         printf("Actions After: %d\n", state.numActions);
 
