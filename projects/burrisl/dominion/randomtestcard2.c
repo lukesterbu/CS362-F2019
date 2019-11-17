@@ -48,7 +48,7 @@ int main() {
 
     // While loop variables
     int currIter = 0;
-    int iterations = 1000;
+    int iterations = 10;
 
     while (currIter < iterations) {
         // Variable declarations
@@ -74,7 +74,7 @@ int main() {
         printf("Hand Count Before: %d", state.handCount[currentPlayer]);
         // Gain a minion card
         gainCard(minion, &state, TO_HAND, currentPlayer);
-        
+
         printf("Hand Count After: %d", state.handCount[currentPlayer]);
 
         // Get variable snapshots
@@ -87,12 +87,11 @@ int main() {
         // Call doMinion()
         doMinion(currentPlayer, choice1, choice2, &state, state.handCount[currentPlayer]);
 
-
         checkTrue(state.numActions, 2, "Number of Actions Equals 2");
-        checkTrue(handSizeBefore - 1, state.handCount[currentPlayer], "Hand Size Decreased By 1");
 
         // Player chooses gain 2 coins
         if (choice1 > 0) {
+            checkTrue(handSizeBefore - 1, state.handCount[currentPlayer], "Hand Size Decreased By 1");
             checkTrue(numCoinsBefore + 2, state.coins, "Coins Increased By 2");
         }
 
