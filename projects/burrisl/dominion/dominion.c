@@ -1165,7 +1165,7 @@ void doAmbassador(int currentPlayer, int choice1, int choice2, struct gameState 
 }
 
 // Assignment 2 function
-void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, int choice1, int choice2, struct gameState *state, int handPos)
+void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, struct gameState *state, int handPos)
 {
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
         if (state->deckCount[nextPlayer] > 0) {

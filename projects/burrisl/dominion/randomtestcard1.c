@@ -22,7 +22,7 @@ void printFormatted(char* desc) {
 	printf("**************************************************************\n");
 }
 
-// Prints PASSED if true and FAILED if false. Alos prints the passed in description
+// Prints PASSED if true and FAILED if false. Also prints the passed in description
 void checkTrue(int x, int y, char* desc) {
 	if (x == y) {
 		printf("PASSED - %s\n", desc);
