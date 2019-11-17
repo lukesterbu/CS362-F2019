@@ -110,6 +110,8 @@ int main() {
         // OR
         // Player did not want to discard an estate
         else {
+            printf("Choice1: %d\n", choice1);
+            printf("Estates in Hand: %d\n", numOldEstatesInHand);
             printf("Estate Supply Before: %d\n", estateSupply);
             printf("Estate Supply After: %d\n", supplyCount(estate, &state));
             checkTrue(estateSupply - 1, supplyCount(estate, &state), "Estate Supply Decremented");
