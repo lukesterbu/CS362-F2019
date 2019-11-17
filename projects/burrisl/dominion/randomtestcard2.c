@@ -106,7 +106,6 @@ int main() {
             checkTrue(4, state.handCount[currentPlayer], "Current Player's Hand Size is Now 4");
             // Only need to run this test if other player had more than 5 cards in their hand
             if (handSizeBeforeOther > 4) {
-                printf("Other Player's Hand Count: %d\n", state.handCount[otherPlayer]);
                 checkTrue(4, state.handCount[otherPlayer], "Other Player's Hand Size is Now 4");
             }
         }
