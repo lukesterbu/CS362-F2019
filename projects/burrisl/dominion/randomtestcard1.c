@@ -48,14 +48,13 @@ int main() {
 
     // While loop variables
     int currIter = 0;
-    int iterations = 10000;
+    int iterations = 1000;
 
     while (currIter < iterations) {
         // Estate Variables
         int numOldEstatesInHand = 0;
         int estateSupply = 0;
         int numNewEstatesInHand = 0;
-        int numOrigTotalCards = 0;
         int numCoinsBefore = 0;
         // Choice variables
         int choice1 = 0;
@@ -83,7 +82,6 @@ int main() {
             }
         }
 
-        numOrigTotalCards = fullDeckCount(currentPlayer, baron, &state);
         numCoinsBefore = state.coins;
         estateSupply = supplyCount(estate, &state);
 

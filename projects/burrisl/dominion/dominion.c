@@ -1071,12 +1071,12 @@ void doMinion(int currentPlayer, int choice1, int choice2, struct gameState *sta
     state->numActions++;
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
-    if (choice2) // Should be choice1 **BUG**
+    if (choice1) // Should be choice1 **BUG**
     {
         state->coins = state->coins + 2;
     }
     //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
-    else if (choice1) // Should be choice2 **BUG**
+    else if (choice2) // Should be choice2 **BUG**
     {
         //discard hand
         while(numHandCards(state) > 0)
