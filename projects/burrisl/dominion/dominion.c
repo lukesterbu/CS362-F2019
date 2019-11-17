@@ -1046,6 +1046,7 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
                 }
                 if (supplyCount(estate, state) > 0) {
                     gainCard(estate, state, 0, currentPlayer); // Gain an estate
+                    printf("Here\n");
                     if (supplyCount(estate, state) == 0) {
                         isGameOver(state);
                     }
