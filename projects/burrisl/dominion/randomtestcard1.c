@@ -59,7 +59,7 @@ int main() {
     int iterations = 10;
 
     while (currIter < iterations) {
-        printf("** ITERATION %d **", currIter + 1);
+        printf("** ITERATION %d **\n", currIter + 1);
         // Initialize the Game
         memset(&state, 23, sizeof(struct gameState));
         initializeGame(numPlayers, k, 618, &state);
