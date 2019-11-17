@@ -87,7 +87,7 @@ int main() {
         handSizeBefore = state.handCount[currentPlayer];
         numActionsBefore = state.numActions;
 
-        // Call doMinion()
+        // Call doTribute()
         doTribute(currentPlayer, otherPlayer, tributeRevealedCards, &state, state.handCount[currentPlayer]);
 
         int dupFlag = 1;

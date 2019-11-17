@@ -898,7 +898,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
-        doTribute(currentPlayer, nextPlayer, tributeRevealedCards, choice1, choice2, state, handPos);
+        doTribute(currentPlayer, nextPlayer, tributeRevealedCards, state, handPos);
         return 0;
 
     case ambassador:
