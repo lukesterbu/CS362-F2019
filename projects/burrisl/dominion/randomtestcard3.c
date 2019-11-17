@@ -83,9 +83,9 @@ int main() {
         }
 
         // Get variable snapshots
+        numActionsBefore = state.numActions;
         numCoinsBefore = state.coins;
         handSizeBefore = state.handCount[currentPlayer];
-        numActionsBefore = state.numActions;
 
         // Call doTribute()
         doTribute(currentPlayer, otherPlayer, tributeRevealedCards, &state, state.handCount[currentPlayer]);
@@ -110,6 +110,9 @@ int main() {
             }
             card++;
         }
+
+        printf("Actions Before: %d\n", numActionsBefore);
+        printf("Actions After: %d\n", state.numActions);
 
         checkTrue(numActionsBefore + (2 * numActionCards), state.numActions, "Actions Are Correct");
         checkTrue(numCoinsBefore + (2 * numTreasureCards), state.coins, "Coins Are Correct");
