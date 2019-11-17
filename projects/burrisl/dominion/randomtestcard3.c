@@ -68,7 +68,6 @@ int main() {
 
         // Randomly set the size of the hand
         state.handCount[currentPlayer] = rand() % 10;
-        state.handCount[otherPlayer] = rand() % 10;
 
         // Add random cards to the hand
         for (int card = 0; card < state.handCount[currentPlayer]; card++) {
@@ -81,6 +80,9 @@ int main() {
         for (int card = 0; card < 2; card++) {
             tributeRevealedCards[card] = rand() % (treasure_map + 1);
         }
+
+        printf("Card 1: %d\n", tributeRevealedCards[0]);
+        printf("Card 2: %d\n", tributeRevealedCards[1]);
 
         // Get variable snapshots
         numActionsBefore = state.numActions;
