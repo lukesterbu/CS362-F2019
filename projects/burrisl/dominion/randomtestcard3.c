@@ -25,7 +25,7 @@ void printFormatted(char* desc) {
 // Prints PASSED if true and FAILED if false. Also prints the passed in description
 void checkTrue(int x, int y, char* desc) {
     if (x == y) {
-        printf("PASSED - %s\n", desc);
+        //printf("PASSED - %s\n", desc);
     }
     else {
         printf("FAILED - %s\n", desc);
@@ -49,7 +49,7 @@ int main() {
 
     // While loop variables
     int currIter = 0;
-    int iterations = 10;
+    int iterations = 1000;
 
     while (currIter < iterations) {
         // Variable declarations
