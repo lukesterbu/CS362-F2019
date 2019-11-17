@@ -48,7 +48,7 @@ int main() {
 
     // While loop variables
     int currIter = 0;
-    int iterations = 1000000;
+    int iterations = 10000;
 
     while (currIter < iterations) {
         // Estate Variables
