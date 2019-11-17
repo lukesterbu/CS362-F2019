@@ -1027,16 +1027,18 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 // Assignment 2 function
 void doBaron(int currentPlayer, int choice1, struct gameState *state)
 {
-    state->numBuys = state->numBuys + 2; //Increase buys by 2 instead of 1 **BUG**
-    if (choice1 > 0) { //Boolean true or going to discard an estate
-        int selectedCard = 0; //Iterator for hand! Start at 1 instead of 0 **BUG**
-        int card_not_discarded = 1; //Flag for discard set!
+    state->numBuys = state->numBuys + 2; // Increase buys by 2 instead of 1 **BUG**
+    if (choice1 > 0) { // Boolean true or going to discard an estate
+        int selectedCard = 0; // Iterator for hand! Start at 1 instead of 0 **BUG**
+        int card_not_discarded = 1; // Flag for discard set!
         while(card_not_discarded) {
-            if (state->hand[currentPlayer][selectedCard] == estate) { //Found an estate card!
-                state->coins += 4; //Add 4 coins to the amount of coins
+            // Check to see if the current card is an estate card
+            if (state->hand[currentPlayer][selectedCard] == estate) {
+                state->coins += 4; // Add 4 coins to the amount of coins
                 discardCard(selectedCard, currentPlayer, state, 0); // Discard the card
-                card_not_discarded = 0; //Exit the loop
+                card_not_discarded = 0; // Exit the loop
             }
+            // We reached the end of the hand
             else if (selectedCard > state->handCount[currentPlayer]) {
                 if (DEBUG) {
                     printf("No estate cards in your hand, invalid choice\n");
@@ -1050,8 +1052,9 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
                 }
                 card_not_discarded = 0; // Exit the loop
             }
+            // Go to the next card
             else {
-                selectedCard++; // Next card
+                selectedCard++;
             }
         }
     }
@@ -1291,15 +1294,15 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
 
 int gainCard(int supplyPos, struct gameState *state, int toFlag, int player)
 {
-    //Note: supplyPos is enum of choosen card
+    // Note: supplyPos is enum of choosen card
 
-    //check if supply pile is empty (0) or card is not used in game (-1)
+    // check if supply pile is empty (0) or card is not used in game (-1)
     if ( supplyCount(supplyPos, state) < 1 )
     {
         return -1;
     }
 
-    //added card for [whoseTurn] current player:
+    // added card for [whoseTurn] current player:
     // toFlag = 0 : add to discard
     // toFlag = 1 : add to deck
     // toFlag = 2 : add to hand
@@ -1314,13 +1317,13 @@ int gainCard(int supplyPos, struct gameState *state, int toFlag, int player)
         state->hand[ player ][ state->handCount[player] ] = supplyPos;
         state->handCount[player]++;
     }
-    else
+    else // toFlag == 0
     {
         state->discard[player][ state->discardCount[player] ] = supplyPos;
         state->discardCount[player]++;
     }
 
-    //decrease number in supply pile
+    // decrease number in supply pile
     state->supplyCount[supplyPos]--;
 
     return 0;
