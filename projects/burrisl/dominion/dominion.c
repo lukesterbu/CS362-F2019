@@ -1029,7 +1029,7 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
 {
     state->numBuys = state->numBuys + 2; // Increase buys by 2 instead of 1 **BUG**
     if (choice1 > 0) { // Boolean true or going to discard an estate
-        int selectedCard = 0; // Iterator for hand! Start at 1 instead of 0 **BUG**
+        int selectedCard = 1; // Iterator for hand! Start at 1 instead of 0 **BUG**
         int card_not_discarded = 1; // Flag for discard set!
         while(card_not_discarded) {
             // Check to see if the current card is an estate card
@@ -1046,7 +1046,6 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
                 }
                 if (supplyCount(estate, state) > 0) {
                     gainCard(estate, state, 0, currentPlayer); // Gain an estate
-                    printf("Here\n");
                     if (supplyCount(estate, state) == 0) {
                         isGameOver(state);
                     }
