@@ -1034,14 +1034,7 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
         while(card_not_discarded) {
             if (state->hand[currentPlayer][selectedCard] == estate) { //Found an estate card!
                 state->coins += 4; //Add 4 coins to the amount of coins
-                state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][selectedCard];
-                state->discardCount[currentPlayer]++;
-                //Set each card slot equal to the next card to account for the discarded card
-                for (; selectedCard < state->handCount[currentPlayer]; selectedCard++) {
-                    state->hand[currentPlayer][selectedCard] = state->hand[currentPlayer][selectedCard+1];
-                }
-                state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
-                state->handCount[currentPlayer]--;
+                discardCard(selectedCard, currentPlayer, state, 0); // Discard the card
                 card_not_discarded = 0; //Exit the loop
             }
             else if (selectedCard > state->handCount[currentPlayer]) {
