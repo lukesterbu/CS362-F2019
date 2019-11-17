@@ -36,15 +36,7 @@ int main() {
     struct gameState state;
     int numPlayers = 2; // May need to randomize this
     int currentPlayer = 0; // May need to randomize this
-    // Estate Variables
-    int numOldEstatesInHand = 0;
-    int estateSupply = 0;
-    int numNewEstatesInHand = 0;
 
-    int numOrigTotalCards = 0;
-    int numCoinsBefore = 0;
-    // Choice variables
-    int choice1 = 0;
     // Supply piles
     int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
 
@@ -59,6 +51,15 @@ int main() {
     int iterations = 10;
 
     while (currIter < iterations) {
+        // Estate Variables
+        int numOldEstatesInHand = 0;
+        int estateSupply = 0;
+        int numNewEstatesInHand = 0;
+        int numOrigTotalCards = 0;
+        int numCoinsBefore = 0;
+        // Choice variables
+        int choice1 = 0;
+
         printf("** ITERATION %d **\n", currIter + 1);
         // Initialize the Game
         memset(&state, 23, sizeof(struct gameState));
