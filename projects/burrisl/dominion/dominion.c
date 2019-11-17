@@ -1205,7 +1205,7 @@ void doTribute(int currentPlayer, int nextPlayer, int *tributeRevealedCards, str
         state->playedCardCount++;
         tributeRevealedCards[1] = -1;
     }
-    for (int i = 0; i < 3; i++) { // Should be i < 2 **BUG**
+    for (int i = 0; i < 2; i++) { // Should be i < 2 **BUG**
         // Treasure Card
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 2;
