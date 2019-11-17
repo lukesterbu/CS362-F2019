@@ -1040,10 +1040,6 @@ void doBaron(int currentPlayer, int choice1, struct gameState *state)
             }
             // We reached the end of the hand
             else if (selectedCard > state->handCount[currentPlayer]) {
-                /*if (DEBUG) {
-                    printf("No estate cards in your hand, invalid choice\n");
-                    printf("Must gain an estate if there are any\n");
-                }*/
                 if (supplyCount(estate, state) > 0) {
                     gainCard(estate, state, 0, currentPlayer); // Gain an estate
                     if (supplyCount(estate, state) == 0) {
