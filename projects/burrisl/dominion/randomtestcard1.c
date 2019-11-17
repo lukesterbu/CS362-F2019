@@ -93,7 +93,7 @@ int main() {
         numCoinsAfter = updateCoins(currentPlayer, &state, 0);
 
         checkTrue(success, 0, "Check if Card was Played Successfully");
-        checkTrue(state.numBuys, 2, "Check if numBuys == 2");
+        checkTrue(state.numBuys, 3, "Check if numBuys == 2"); // This should fail because of my bug
 
         // Check how many estate cards are in the player's hand
         for (int card = 0; card < numHandCards(&state); card++) {
