@@ -88,7 +88,7 @@ int main() {
         handSizeBefore = state.handCount[currentPlayer];
 
         // Call doTribute()
-        doTribute(currentPlayer, otherPlayer, tributeRevealedCards, &state, state.handCount[currentPlayer]);
+        doTribute(currentPlayer, otherPlayer, tributeRevealedCards, &state);
 
         int dupFlag = 1;
         int card = 0;
