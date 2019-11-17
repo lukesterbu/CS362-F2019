@@ -76,7 +76,7 @@ int main() {
 
         // Get variable snapshots
         numCoinsBefore = state.coins;
-        handSizeBefore = handCount[currentPlayer];
+        handSizeBefore = state.handCount[currentPlayer];
 
         choice1 = rand() % 2; // Get a random choice1
         choice2 = rand() % 2; // Get a random choice2
@@ -85,7 +85,7 @@ int main() {
         doMinion(currentPlayer, choice1, &state);
 
         checkTrue(state.numActions, 2, "Number of Actions Equals 2");
-        checkTrue(handSizeBefore - 1, handCount[currentPlayer], "Hand Size Decreased By 1");
+        checkTrue(handSizeBefore - 1, state.handCount[currentPlayer], "Hand Size Decreased By 1");
 
         // Player chooses gain 2 coins
         if (choice1 > 0) {
