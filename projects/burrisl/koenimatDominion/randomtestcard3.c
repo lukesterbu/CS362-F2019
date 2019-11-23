@@ -104,7 +104,7 @@ int main() {
             state.discard[otherPlayer][state.discardCount[otherPlayer] - 1] = tributeRevealedCards[1];
         }
         // Get 2 random cards from top of deck
-        else if (deckCount[otherPlayer] > 1) {
+        else if (state.deckCount[otherPlayer] > 1) {
             state.deck[otherPlayer][state.deckCount[otherPlayer]] = tributeRevealedCards[0];
             state.deck[otherPlayer][state.deckCount[otherPlayer] - 1] = tributeRevealedCards[1];
         }
