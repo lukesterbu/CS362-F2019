@@ -64,7 +64,7 @@ randomtestresults: randomtestcard1 randomtestcard2 randomtestcard3
 	gcov -b -f dominion.c >> randomtestresults.out
 	cat dominion.c.gcov >> randomtestresults.out
 
-all: playdom player unittest1 unittest2 unittest3 unittest4 unittest5 unittestresults randomtestcard1 randomtestcard2 randomtestcard3 randomtestresults
+all: playdom player unittest1 unittest2 unittest3 unittest4 unittest5 randomtestcard1 randomtestcard2 randomtestcard3
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe unittest1 unittest2 unittest3 unittest4 unittest5 unittestresults randomtestcard1 randomtestcard2 randomtestcard3 randomtestresults *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
