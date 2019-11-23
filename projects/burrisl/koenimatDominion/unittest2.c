@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author: 		Luke Burris
-** Description:	Tests the doMinion() function using my checkTrue function()
+** Description:	Tests the minionCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include "rngs.h"
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     struct gameState state;
 
     printf("\n\n");
-    printFormatted("UNITTEST2 - doMinion()");
+    printFormatted("UNITTEST2 - minionCardEffect()");
     /***************************************************************************************
     ** choice1 = 1. Check when player chooses to gain 2 coins
     ***************************************************************************************/
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
     state.discardCount[currentPlayer] = 0;
 
     // Call the function being tested;
-    doMinion(currentPlayer, choice1, choice2, &state, 0);
+    minionCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of funtion sig
 
     // Do tests
     printFormatted("SUBTEST 1 - choice1 = 1. Check for When Player Chooses to Gain 2 Coins.");
@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
     state.handCount[otherPlayer] = 5;
 
     // Call the function being tested;
-    doMinion(currentPlayer, choice1, choice2, &state, 0);
+    minionCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of funtion sig
 
     // Do tests
     printFormatted("SUBTEST 2 - choice2 = 1. Check When Player Chooses to Discard.");

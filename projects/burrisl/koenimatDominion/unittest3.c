@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author: 		Luke Burris
-** Description:	Tests the doAmbassador() function using my checkTrue function()
+** Description:	Tests the ambassadorCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include "rngs.h"
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     struct gameState state;
 
     printf("\n\n");
-    printFormatted("UNITTEST3 - doAmbassador()");
+    printFormatted("UNITTEST3 - ambassadorCardEffect()");
 	
     /***************************************************************************************
     ** choice2 > 2. This will fail due to my bug
@@ -60,7 +60,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 1 - choice2 = 3.");
-    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1."); // This should fail because of my bug
+    // Need extra arguments because of function signature
+    checkTrue(ambassadorCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 
     /***************************************************************************************
     ** choice2 < 0.
@@ -81,7 +82,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 2 - choice2 = -1.");
-    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(ambassadorCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 
     /***************************************************************************************
     ** choice1 == handPos.
@@ -102,7 +104,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 3 - choice1 == handPos.");
-    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(ambassadorCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 
     /***************************************************************************************
     ** j < choice2.
@@ -123,7 +126,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 4 - j < choice2.");
-    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(ambassadorCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 	
     /***************************************************************************************
     ** Rest of Code
@@ -145,14 +149,15 @@ int main(int argc, char** argv) {
     state.discardCount[otherPlayer] = 0;
     state.discardCount[currentPlayer] = 0;
 
-    // Store this for later since it will get changed once doAmbassador is called
+    // Store this for later since it will get changed once ambassadorCardEffect is called
     int tempCard = state.hand[currentPlayer][choice1];
     state.supplyCount[tempCard] = 10;
 
     // Do tests
     printFormatted("SUBTEST 5 - Rest of Code.");
     // Call the function being tested and test
-    checkTrue(doAmbassador(currentPlayer, choice1, choice2, &state, 1), 0, "Function Should Return 0");
+    // Need extra arguments because of function signature
+    checkTrue(ambassadorCardEffect(0, choice1, choice2, 0, &state, 0, 0), 0, "Function Should Return 0");
     checkTrue(state.supplyCount[tempCard], 9, "Supply Count Should Decrease By 1.");
     checkTrue(state.discardCount[otherPlayer], 1, "Other Player Discard Count Should Increase By 1.");
     checkTrue(state.handCount[currentPlayer], 4, "Current Player Hand Count Should Decrease By 1.");

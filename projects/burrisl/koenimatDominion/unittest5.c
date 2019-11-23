@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author: 		Luke Burris
-** Description:	Tests the doMine() function using my checkTrue function()
+** Description:	Tests the mineCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include "rngs.h"
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     struct gameState state;
 
     printf("\n\n");
-    printFormatted("UNITTEST5 - doMine()");
+    printFormatted("UNITTEST5 - mineCardEffect()");
 	
     /***************************************************************************************
     ** state->hand[currentPlayer[choice1] < copper]
@@ -60,7 +60,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 1 - state->hand[currentPlayer][choice1] < copper.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(mineCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 	
     /***************************************************************************************
     ** state->hand[currentPlayer][choice1] > gold]
@@ -81,7 +82,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 2 - state->hand[currentPlayer][choice1] > gold.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(mineCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
     
     /***************************************************************************************
     ** choice 2 > treasure_map
@@ -102,7 +104,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 3 - choice2 > treasure_map.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(mineCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 
     /***************************************************************************************
     ** choice 2 < curse
@@ -123,7 +126,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 4 - choice2 < curse.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(mineCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 
     /***************************************************************************************
     ** (getCost(state->hand[currentPlayer][choice1] + 3) > getCost(choice2)
@@ -144,7 +148,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 5 - (getCost(state->hand[currentPlayer][choice1] + 3) > getCost(choice2).");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), -1, "Should Return -1.");
+    // Need extra arguments because of function signature
+    checkTrue(mineCardEffect(0, choice1, choice2, 0, &state, 0, 0), -1, "Should Return -1.");
 	
     /***************************************************************************************
     ** Rest of Code
@@ -166,7 +171,8 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 6 - Rest of Code.");
-    checkTrue(doMine(currentPlayer, choice1, choice2, &state, 0), 0, "Should Return 0.");
+    // Need extra arguments because of function signature
+    checkTrue(mineCardEffect(0, choice1, choice2, 0, &state, 0, 0), 0, "Should Return 0.");
     checkTrue(state.deckCount[currentPlayer], 10, "Current Player Deck Count Should Change");
 	return 0;
 }

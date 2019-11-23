@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author: 		Luke Burris
-** Description:	Tests the doBaron() function using my checkTrue function()
+** Description:	Tests the baronCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include <string.h>
@@ -37,7 +37,7 @@ int main () {
 
     struct gameState state;
 
-    printFormatted("UNITTEST1 - doBaron()");
+    printFormatted("UNITTEST1 - baronCardEffect()");
     /***************************************************************************************
     ** Test to see if an estate card is found in the hand when choice1 > 0
     ***************************************************************************************/
@@ -54,7 +54,7 @@ int main () {
     state.discardCount[currentPlayer] = 0;
 
     // Call the function being tested;
-    doBaron(currentPlayer, choice1, &state);
+    baronCardEffect(0, choice1, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 1 - choice1 = 1. Check for Estate Card in Hand With All Estate Hand.");
@@ -66,7 +66,7 @@ int main () {
     /***************************************************************************************
     ** Test to see if an estate card is found in the hand when choice1 > 0.
     ** This will find the bug isnce the first card is ignored because of my bug with the
-    ** iterator in doBaron.
+    ** iterator in baronCardEffect.
     ***************************************************************************************/
     // Standard Copper setup
     memset(&state, 23, sizeof(struct gameState));
@@ -82,7 +82,7 @@ int main () {
     state.discardCount[currentPlayer] = 0;
 
     // Call the function being tested;
-    doBaron(currentPlayer, choice1, &state);
+    baronCardEffect(0, choice1, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 2 - choice1 = 1. Check for Estate at Index 0 of Hand.");
@@ -107,7 +107,7 @@ int main () {
     state.discardCount[currentPlayer] = 0;
 
     // Call the function being tested;
-    doBaron(currentPlayer, choice1, &state);
+    baronCardEffect(0, choice1, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 3 - choice1 = 1. No Estate Card Found in Hand.");
@@ -130,7 +130,7 @@ int main () {
     state.discardCount[currentPlayer] = 0;
 
         // Call the function being tested;
-    doBaron(currentPlayer, choice1, &state);
+    baronCardEffect(0, choice1, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 4 - choice1 = 0.");

@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author: 		Luke Burris
-** Description:	Tests the doTribute() function using my checkTrue function()
+** Description:	Tests the tributeCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include "rngs.h"
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
     int numPlayers = 2;
     int currentPlayer = 0;
     int otherPlayer = 1;
-    int tributeRevealedCards[2];
+    int tributeRevealedCards[2] = {-1, -1};
     
     int k[10] = {adventurer, council_room, feast, gardens, mine,
         remodel, smithy, village, baron, great_hall};
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     struct gameState state;
 
     printf("\n\n");
-    printFormatted("UNITTEST4 - doTribute()");
+    printFormatted("UNITTEST4 - tributeCardEffect()");
 	
     /***************************************************************************************
     ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
@@ -60,10 +60,8 @@ int main(int argc, char** argv) {
     state.coins = 0;
     state.discardCount[currentPlayer] = 0;
     state.deckCount[otherPlayer] = 1;
-    tributeRevealedCards[0] = 0;
-    tributeRevealedCards[1] = 1;
 
-    doTribute(currentPlayer, otherPlayer, tributeRevealedCards, choice1, choice2, &state, 0);
+    tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 1 - state->deckCount[nextPlayer] > 0.");
@@ -87,10 +85,8 @@ int main(int argc, char** argv) {
     state.coins = 0;
     state.discardCount[currentPlayer] = 1;
     state.deckCount[otherPlayer] = 0;
-    tributeRevealedCards[0] = 0;
-    tributeRevealedCards[1] = 1;
 
-    doTribute(currentPlayer, otherPlayer, tributeRevealedCards, choice1, choice2, &state, 0);
+    tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 2 - state->discardCount[nextPlayer] > 0.");
@@ -113,10 +109,8 @@ int main(int argc, char** argv) {
     state.coins = 0;
     state.discardCount[currentPlayer] = 4;
     state.deckCount[otherPlayer] = 0;
-    tributeRevealedCards[0] = 0;
-    tributeRevealedCards[1] = 1;
 
-    doTribute(currentPlayer, otherPlayer, tributeRevealedCards, choice1, choice2, &state, 0);
+    tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 3 - else{}.");
