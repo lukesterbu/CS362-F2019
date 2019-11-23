@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author: 		Luke Burris
-** Description:	Tests the doBaron() function using my checkTrue function()
+** Description:	Tests the baronCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include <string.h>
@@ -44,7 +44,7 @@ int main() {
     srand(time(NULL));
  
     // Print out title of test
-    printFormatted("RANDOM TEST 1 - doBaron()");
+    printFormatted("RANDOM TEST 1 - baronCardEffect()");
 
     // While loop variables
     int currIter = 0;
@@ -89,8 +89,8 @@ int main() {
 
         choice1 = rand() % 2; // Get a random choice1
 
-        // Call doBaron()
-        doBaron(currentPlayer, choice1, &state);
+        // Call baronCardEffect()
+        baronCardEffect(0, choice1, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
         checkTrue(state.numBuys, 2, "Number of Buys Equals 2"); // This should fail every time because of my bug
 
@@ -122,7 +122,7 @@ int main() {
     printf("Clock Ticks: %ld\n", end_t);
     printf("Time Taken to Execute %d Iterations: %f\n", iterations, total_t);
 
-    printFormatted("RANDOM TEST 1 COMPLETED - doBaron()");
+    printFormatted("RANDOM TEST 1 COMPLETED - baronCardEffect()");
 
     return 0;
 }

@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author:      Luke Burris
-** Description: Tests the doMinion() function using my checkTrue function()
+** Description: Tests the minionCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include <string.h>
@@ -45,7 +45,7 @@ int main() {
     srand(time(NULL));
  
     // Print out title of test
-    printFormatted("RANDOM TEST 2 - doMinion()");
+    printFormatted("RANDOM TEST 2 - minionCardEffect()");
 
     // While loop variables
     int currIter = 0;
@@ -91,8 +91,8 @@ int main() {
             choice2 = 1;
         }
 
-        // Call doMinion()
-        doMinion(currentPlayer, choice1, choice2, &state, state.handCount[currentPlayer]);
+        // Call minionCardEffect()
+        minionCardEffect(0, choice1, choice2, 0, &state, state.handCount[currentPlayer], 0); // Need extra arugments because of function sig
 
         checkTrue(state.numActions, 2, "Number of Actions Equals 2");
 
@@ -112,7 +112,7 @@ int main() {
         currIter++; // Increment Iterator
     }
 
-    printFormatted("RANDOM TEST 2 COMPLETED - doMinion()");
+    printFormatted("RANDOM TEST 2 COMPLETED - minionCardEffect()");
 
     return 0;
 }

@@ -1,6 +1,6 @@
 /**************************************************************************
 ** Author:      Luke Burris
-** Description: Tests the doTribute() function using my checkTrue function()
+** Description: Tests the tributeCardEffect() function using my checkTrue function()
 **************************************************************************/
 #include "dominion.h"
 #include <string.h>
@@ -45,7 +45,7 @@ int main() {
     srand(time(NULL));
  
     // Print out title of test
-    printFormatted("RANDOM TEST 3 - doTribute()");
+    printFormatted("RANDOM TEST 3 - tributeCardEffect()");
 
     // While loop variables
     int currIter = 0;
@@ -59,7 +59,7 @@ int main() {
         int numTreasureCards = 0;
         int numVictoryCards = 0;
         int numActionCards = 0;
-        int tributeRevealedCards[2];
+        int tributeRevealedCards[2] = {-1, -1};
 
         printf("** ITERATION %d **\n", currIter + 1);
         // Initialize the Game
@@ -76,21 +76,40 @@ int main() {
             state.hand[currentPlayer][card] = rand() % (treasure_map + 1);
         }
 
+        // Add random cards to the deck
+        for (int card = 0; card < state.deckCount[currentPlayer]; card++) {
+            state.deck[currentPlayer][card] = rand() % (treasure_map + 1);
+        }
+
+        // Add random cards to the discard pile
+        for (int card = 0; card < state.discardCount[currentPlayer]; card++) {
+            state.discard[currentPlayer][card] = rand() % (treasure_map + 1);
+        }
+
         // Gain a tribute card
         gainCard(tribute, &state, TO_HAND, currentPlayer);
-
-        for (int card = 0; card < 2; card++) {
-            tributeRevealedCards[card] = rand() % (treasure_map + 1);
-        }
 
         // Get variable snapshots
         numActionsBefore = state.numActions;
         numCoinsBefore = state.coins;
         handSizeBefore = state.handCount[currentPlayer];
 
-        // Call doTribute()
-        doTribute(currentPlayer, otherPlayer, tributeRevealedCards, &state);
+        // Do nothing for more coverage
+        if (deckCount[otherPlayer] + discardCount[otherPlayer] == 0) {
+            // Both tributeRevealedCards will be -1
+        }
+        // Get 2 random cards from top of discard pile
+        else if (deckCount[otherPlayer] == 0 && discardCount[otherPlayer] > 1) {
+            state.discard[otherPlayer][state->discardCount[otherPlayer]] = tributeRevealedCards[0];
+            state.discard[otherPlayer][state->discardCount[otherPlayer] - 1] = tributeRevealedCards[1];
+        }
+        // Get 2 random cards from top of deck
+        else if (deckCount[otherPlayer] > 1) {
+            state.deck[otherPlayer][state->deckCount[otherPlayer]] = tributeRevealedCards[0];
+            state.deck[otherPlayer][state->deckCount[otherPlayer] - 1] = tributeRevealedCards[1];
+        }
 
+        // Increment variables appropriately
         int dupFlag = 1;
         int card = 0;
         while (dupFlag == 1 && card < 2) {
@@ -112,6 +131,9 @@ int main() {
             card++;
         }
 
+        // Call tributeCardEffect()
+        tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
+
         checkTrue(numActionsBefore + (2 * numActionCards), state.numActions, "Actions Are Correct");
         checkTrue(numCoinsBefore + (2 * numTreasureCards), state.coins, "Coins Are Correct");
         checkTrue(handSizeBefore + (2 * numVictoryCards), state.handCount[currentPlayer], "Hand Count is Correct");
@@ -119,7 +141,7 @@ int main() {
         currIter++; // Increment Iterator
     }
 
-    printFormatted("RANDOM TEST 3 COMPLETED - doTribute()");
+    printFormatted("RANDOM TEST 3 COMPLETED - tributeCardEffect()");
 
     return 0;
 }
