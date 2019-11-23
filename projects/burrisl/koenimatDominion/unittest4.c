@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
     tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
-    printFormatted("SUBTEST 1 - state->deckCount[nextPlayer] > 0.");
+    printFormatted("SUBTEST 1 - state->deckCount[nextPlayer] > 0 (copper)");
     checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
 
     /***************************************************************************************
@@ -85,12 +85,14 @@ int main(int argc, char** argv) {
     state.coins = 0;
     state.discardCount[currentPlayer] = 1;
     state.deckCount[otherPlayer] = 0;
+    state.discard[otherPlayer][state.discardCount[otherPlayer]] = copper;
 
     tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 2 - state->discardCount[nextPlayer] > 0.");
     checkTrue(state.deckCount[otherPlayer], 0, "Other Player Discard Count Decreases by 1");
+    checkTrue(1, state.coins, "Coins are Correct");
 
     /***************************************************************************************
     ** else {}
