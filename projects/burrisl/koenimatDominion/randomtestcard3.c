@@ -95,18 +95,18 @@ int main() {
         handSizeBefore = state.handCount[currentPlayer];
 
         // Do nothing for more coverage
-        if (deckCount[otherPlayer] + discardCount[otherPlayer] == 0) {
+        if (state.deckCount[otherPlayer] + state.discardCount[otherPlayer] == 0) {
             // Both tributeRevealedCards will be -1
         }
         // Get 2 random cards from top of discard pile
-        else if (deckCount[otherPlayer] == 0 && discardCount[otherPlayer] > 1) {
-            state.discard[otherPlayer][state->discardCount[otherPlayer]] = tributeRevealedCards[0];
-            state.discard[otherPlayer][state->discardCount[otherPlayer] - 1] = tributeRevealedCards[1];
+        else if (state.deckCount[otherPlayer] == 0 && state.discardCount[otherPlayer] > 1) {
+            state.discard[otherPlayer][state.discardCount[otherPlayer]] = tributeRevealedCards[0];
+            state.discard[otherPlayer][state.discardCount[otherPlayer] - 1] = tributeRevealedCards[1];
         }
         // Get 2 random cards from top of deck
         else if (deckCount[otherPlayer] > 1) {
-            state.deck[otherPlayer][state->deckCount[otherPlayer]] = tributeRevealedCards[0];
-            state.deck[otherPlayer][state->deckCount[otherPlayer] - 1] = tributeRevealedCards[1];
+            state.deck[otherPlayer][state.deckCount[otherPlayer]] = tributeRevealedCards[0];
+            state.deck[otherPlayer][state.deckCount[otherPlayer] - 1] = tributeRevealedCards[1];
         }
 
         // Increment variables appropriately
