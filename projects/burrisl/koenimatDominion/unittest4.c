@@ -360,11 +360,11 @@ int main(int argc, char** argv) {
     state.discardCount[otherPlayer] = 5;
     state.deckCount[otherPlayer] = 0;
     
-    state.discard[0] = copper;
-    state.discard[1] = silver;
-    state.discard[2] = estate;
-    state.discard[3] = baron; // this one matters
-    state.discard[4] = province; // this one matters
+    state.discard[otherPlayer][0] = copper;
+    state.discard[otherPlayer][1] = silver;
+    state.discard[otherPlayer][2] = estate;
+    state.discard[otherPlayer][3] = baron; // this one matters
+    state.discard[otherPlayer][4] = province; // this one matters
 
     tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
