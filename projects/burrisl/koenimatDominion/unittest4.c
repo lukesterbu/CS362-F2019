@@ -25,9 +25,6 @@ void checkTrue(int x, int y, char* desc) {
 }
 
 int main(int argc, char** argv) {
-	int r;
-    int choice1;
-    int choice2;
     // This is a real value
     int numPlayers = 2;
     int currentPlayer = 0;
@@ -45,61 +42,196 @@ int main(int argc, char** argv) {
     /***************************************************************************************
     ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
     ** state->deckCount[nextPlayer] > 0
+    ** The deck card is a treasure card so the coins should only be increased by 2
     ***************************************************************************************/
     // Standard Estate setup
     memset(&state, 23, sizeof(struct gameState));
-    r = initializeGame(numPlayers, k, 618, &state);
+    initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
     	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
     }
 
     // Switch variables so test should pass
-    choice1 = 0;
-    choice2 = 3;
     state.coins = 0;
-    state.discardCount[currentPlayer] = 0;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 0;
     state.deckCount[otherPlayer] = 1;
+    state.deck[otherPlayer][0] = copper;
 
-    tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 1 - state->deckCount[nextPlayer] > 0 (copper)");
     checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
+    checkTrue(state.coins, 2, "Coins are Correct");
+    checkTrue(state.numActions, 0, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
+
+    /***************************************************************************************
+    ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
+    ** state->deckCount[nextPlayer] > 0
+    ** The deck card is a victory card so the handCount should only be increased by 2
+    ***************************************************************************************/
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+        state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    state.coins = 0;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 0;
+    state.deckCount[otherPlayer] = 1;
+    state.deck[otherPlayer][0] = estate;
+
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
+
+    // Do tests
+    printFormatted("SUBTEST 2 - state->deckCount[nextPlayer] > 0 (estate)");
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
+    checkTrue(state.coins, 0, "Coins are Correct");
+    checkTrue(state.numActions, 0, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 7, "Hand Count is Correct"); // 5 + 2 = 7
+
+
+    /***************************************************************************************
+    ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
+    ** state->deckCount[nextPlayer] > 0
+    ** The deck card is a action card so the numActions should only be increased by 2
+    ***************************************************************************************/
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+        state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    state.coins = 0;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 0;
+    state.deckCount[otherPlayer] = 1;
+    state.deck[otherPlayer][0] = adventurer;
+
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
+
+    // Do tests
+    printFormatted("SUBTEST 3 - state->deckCount[nextPlayer] > 0 (action)");
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
+    checkTrue(state.coins, 0, "Coins are Correct");
+    checkTrue(state.numActions, 2, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
 
     /***************************************************************************************
     ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
     ** state->discardCount[nextPlayer] > 0
+    ** Card should be moved to deck and then treated the same way
+    ** The card is a treasure card so the coins should be increased by 2
     ***************************************************************************************/
+
     // Standard Estate setup
     memset(&state, 23, sizeof(struct gameState));
-    r = initializeGame(numPlayers, k, 618, &state);
+    initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+        state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
     }
 
     // Switch variables so test should pass
-    choice1 = 0;
-    choice2 = 3;
     state.coins = 0;
-    state.discardCount[currentPlayer] = 1;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 1;
     state.deckCount[otherPlayer] = 0;
-    state.discard[otherPlayer][state.discardCount[otherPlayer]] = copper;
+    state.deck[otherPlayer][0] = copper;
 
-    tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
-    printFormatted("SUBTEST 2 - state->discardCount[nextPlayer] > 0.");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Discard Count Decreases by 1");
-    checkTrue(1, state.coins, "Coins are Correct");
+    printFormatted("SUBTEST 4 - state->deckCount[nextPlayer] > 0 (copper)");
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
+    checkTrue(state.coins, 2, "Coins are Correct");
+    checkTrue(state.numActions, 0, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
+
+    /***************************************************************************************
+    ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
+    ** state->discardCount[nextPlayer] > 0
+    ** Card should be moved to deck and then treated the same way
+    ** The card is a victory card so the handCount should be increased by 2
+    ***************************************************************************************/
+
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+        state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    state.coins = 0;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 1;
+    state.deckCount[otherPlayer] = 0;
+    state.deck[otherPlayer][0] = estate;
+
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
+
+    // Do tests
+    printFormatted("SUBTEST 5 - state->deckCount[nextPlayer] > 0 (estate)");
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
+    checkTrue(state.coins, 0, "Coins are Correct");
+    checkTrue(state.numActions, 0, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 7, "Hand Count is Correct"); // 5 + 2 = 7
+
+    /***************************************************************************************
+    ** (state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1
+    ** state->discardCount[nextPlayer] > 0
+    ** Card should be moved to deck and then treated the same way
+    ** The card is a action card so the numActions should be increased by 2
+    ***************************************************************************************/
+
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+        state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    state.coins = 0;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 1;
+    state.deckCount[otherPlayer] = 0;
+    state.deck[otherPlayer][0] = adventurer;
+
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
+
+    // Do tests
+    printFormatted("SUBTEST 6 - state->deckCount[nextPlayer] > 0 (action)");
+    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
+    checkTrue(state.coins, 0, "Coins are Correct");
+    checkTrue(state.numActions, 2, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
 
     /***************************************************************************************
     ** else {}
     ***************************************************************************************/
     // Standard Estate setup
     memset(&state, 23, sizeof(struct gameState));
-    r = initializeGame(numPlayers, k, 618, &state);
+    initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
     	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
@@ -112,7 +244,7 @@ int main(int argc, char** argv) {
     state.discardCount[currentPlayer] = 4;
     state.deckCount[otherPlayer] = 0;
 
-    tributeCardEffect(0, choice1, choice2, 0, &state, 0, 0); // Need extra arguments because of function sig
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
     printFormatted("SUBTEST 3 - else{}.");
