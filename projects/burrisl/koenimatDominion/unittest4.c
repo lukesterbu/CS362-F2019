@@ -238,8 +238,6 @@ int main(int argc, char** argv) {
     }
 
     // Switch variables so test should pass
-    choice1 = 0;
-    choice2 = 3;
     state.coins = 0;
     state.discardCount[currentPlayer] = 4;
     state.deckCount[otherPlayer] = 0;
