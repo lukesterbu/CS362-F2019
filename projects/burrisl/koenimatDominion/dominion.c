@@ -1295,6 +1295,7 @@ int tributeCardEffect(int card, int choice1, int choice2, int choice3, struct ga
 
     for (i = 0; i <= 2; i ++) { // This is a bug
         printf("Iteration %d\n", i + 1); // Delete this
+        printf("%d\n", tributeRevealedCards[i]);
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 1;
         }
