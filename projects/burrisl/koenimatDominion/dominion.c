@@ -1117,7 +1117,7 @@ int mineCardEffect(int card, int choice1, int choice2, int choice3, struct gameS
     gainCard(choice2, state, 2, currentPlayer);
 
     //discard card from hand
-    discardCard(handPos, currentPlayer, state, 0);
+    discardCard(handPos, currentPlayer, state, 0); // This was causing a compile error when currentPlayer was nextPlayer
             
     //discard trashed card
     for (i = 0; i < state->handCount[currentPlayer]; i++)
