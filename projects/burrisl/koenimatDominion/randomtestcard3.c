@@ -73,17 +73,17 @@ int main() {
 
         // Add random cards to the hand
         for (int card = 0; card < state.handCount[otherPlayer]; card++) {
-            state.hand[otherPlayer][card] = rand() % 3;
+            state.hand[otherPlayer][card] = rand() % 3 + 1;
         }
 
         // Add random cards to the deck
         for (int card = 0; card < state.deckCount[otherPlayer]; card++) {
-            state.deck[otherPlayer][card] = rand() % 3;
+            state.deck[otherPlayer][card] = rand() % 3 + 1;
         }
 
         // Add random cards to the discard pile
         for (int card = 0; card < state.discardCount[otherPlayer]; card++) {
-            state.discard[otherPlayer][card] = rand() % 3;
+            state.discard[otherPlayer][card] = rand() % 3 + 1;
         }
 
         // Gain a tribute card
