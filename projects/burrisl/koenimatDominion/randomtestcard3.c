@@ -141,6 +141,8 @@ int main() {
         // Call tributeCardEffect()
         tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
+        printf("%d + (2 * %d) | should equal | %d\n", numActionsBefore, numActionCards, state.numActions);
+
         checkTrue(numActionsBefore + (2 * numActionCards), state.numActions, "Actions Are Correct");
         checkTrue(numCoinsBefore + (2 * numTreasureCards), state.coins, "Coins Are Correct");
         checkTrue(handSizeBefore + (2 * numVictoryCards), state.handCount[currentPlayer], "Hand Count is Correct");
