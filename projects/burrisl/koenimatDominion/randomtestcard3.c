@@ -109,6 +109,9 @@ int main() {
             tributeRevealedCards[1] = state.deck[otherPlayer][state.deckCount[otherPlayer] - 1];
         }
 
+        printf("Card 1: %s\n", tributeRevealedCards[0]);
+        printf("Card 2: %s\n", tributeRevealedCards[1]);
+
         // Increment variables appropriately
         int dupFlag = 1;
         int card = 0;
@@ -116,15 +119,15 @@ int main() {
             if (tributeRevealedCards[0] == tributeRevealedCards[1]) {
                 dupFlag = 0;
             }
-            // Treasure Card
+            // Treasure Card (copper = 4, silver = 5, gold = 6)
             if (tributeRevealedCards[card] == copper || tributeRevealedCards[card] == silver || tributeRevealedCards[card] == gold) {
                 numTreasureCards++;
             }
-            // Victory Card
+            // Victory Card (estate = 1, duchy = 2, province = 3, gardens = 10, great_hall = 16)
             else if (tributeRevealedCards[card] == estate || tributeRevealedCards[card] == duchy || tributeRevealedCards[card] == province || tributeRevealedCards[card] == gardens || tributeRevealedCards[card] == great_hall) {
                 numVictoryCards++;
             }
-            // Action Card
+            // Action Card (any other number between 0 and 26)
             else {
                 numActionCards++;
             }
