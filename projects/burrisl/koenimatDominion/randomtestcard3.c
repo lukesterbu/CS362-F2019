@@ -109,8 +109,8 @@ int main() {
             tributeRevealedCards[1] = state.deck[otherPlayer][state.deckCount[otherPlayer] - 1];
         }
 
-        printf("Card 1: %s\n", tributeRevealedCards[0]);
-        printf("Card 2: %s\n", tributeRevealedCards[1]);
+        printf("Card 1: %d\n", tributeRevealedCards[0]);
+        printf("Card 2: %d\n", tributeRevealedCards[1]);
 
         // Increment variables appropriately
         int dupFlag = 1;
