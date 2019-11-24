@@ -67,23 +67,23 @@ int main() {
         initializeGame(numPlayers, k, 618, &state);
 
         // Randomly set the size of different variables
-        state.handCount[currentPlayer] = rand() % 10;
+        state.handCount[otherPlayer] = rand() % 10;
         state.discardCount[otherPlayer] = rand() % 100;
         state.deckCount[otherPlayer] = rand() % 100;
 
         // Add random cards to the hand
         for (int card = 0; card < state.handCount[currentPlayer]; card++) {
-            state.hand[currentPlayer][card] = rand() % (treasure_map + 1);
+            state.hand[otherPlayer][card] = rand() % (treasure_map + 1);
         }
 
         // Add random cards to the deck
         for (int card = 0; card < state.deckCount[currentPlayer]; card++) {
-            state.deck[currentPlayer][card] = rand() % (treasure_map + 1);
+            state.deck[otherPlayer][card] = rand() % (treasure_map + 1);
         }
 
         // Add random cards to the discard pile
         for (int card = 0; card < state.discardCount[currentPlayer]; card++) {
-            state.discard[currentPlayer][card] = rand() % (treasure_map + 1);
+            state.discard[otherPlayer][card] = rand() % (treasure_map + 1);
         }
 
         // Gain a tribute card
