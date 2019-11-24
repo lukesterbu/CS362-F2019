@@ -1293,9 +1293,9 @@ int tributeCardEffect(int card, int choice1, int choice2, int choice3, struct ga
         tributeRevealedCards[1] = -1;
     }
 
-    for (i = 0; i < 2; i ++) { // This is a bug (was <= 2 which would loop 3 times instead of just 2 times)
+    for (i = 0; i <= 2; i ++) {
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-            state->coins += 1; // This should be plus 2 ** BUG **
+            state->coins += 1;
         }
 
         else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found

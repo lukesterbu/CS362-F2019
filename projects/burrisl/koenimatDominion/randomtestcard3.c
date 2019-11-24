@@ -127,6 +127,10 @@ int main() {
             else if (tributeRevealedCards[card] == estate || tributeRevealedCards[card] == duchy || tributeRevealedCards[card] == province || tributeRevealedCards[card] == gardens || tributeRevealedCards[card] == great_hall) {
                 numVictoryCards++;
             }
+            // Card equals -1 which means it wasn't set
+            else if (tributeRevealedCards[card] == -1) {
+                // Do nothing
+            }
             // Action Card (any other number between 0 and 26)
             else {
                 numActionCards++;
