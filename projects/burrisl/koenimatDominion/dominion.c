@@ -1293,7 +1293,8 @@ int tributeCardEffect(int card, int choice1, int choice2, int choice3, struct ga
         tributeRevealedCards[1] = -1;
     }
 
-    for (i = 0; i < 2; i ++) { // This is a bug
+    for (i = 0; i <= 2; i ++) { // This is a bug
+        printf("Iteration %d\n", i + 1); // Delete this
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 1;
         }
@@ -1301,9 +1302,6 @@ int tributeCardEffect(int card, int choice1, int choice2, int choice3, struct ga
         else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
             drawCard(currentPlayer, state);
             drawCard(currentPlayer, state);
-        }
-        else if (tributeRevealedCards[i] == -1) { // Need to delete this
-            // Do nothing
         }
         else { //Action Card
             state->numActions = state->numActions + 2;
