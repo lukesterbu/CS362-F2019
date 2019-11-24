@@ -73,7 +73,7 @@ int main() {
 
         // Add random cards to the hand
         for (int card = 0; card < state.handCount[otherPlayer]; card++) {
-            state.hand[otherPlayer][card] = rand() % ;
+            state.hand[otherPlayer][card] = rand() % 3 + 1;
         }
 
         // Add random cards to the deck
