@@ -72,22 +72,22 @@ int main() {
         state.deckCount[otherPlayer] = rand() % 100;
 
         // Add random cards to the hand
-        for (int card = 0; card < state.handCount[currentPlayer]; card++) {
+        for (int card = 0; card < state.handCount[otherPlayer]; card++) {
             state.hand[otherPlayer][card] = rand() % (treasure_map + 1);
         }
 
         // Add random cards to the deck
-        for (int card = 0; card < state.deckCount[currentPlayer]; card++) {
+        for (int card = 0; card < state.deckCount[otherPlayer]; card++) {
             state.deck[otherPlayer][card] = rand() % (treasure_map + 1);
         }
 
         // Add random cards to the discard pile
-        for (int card = 0; card < state.discardCount[currentPlayer]; card++) {
+        for (int card = 0; card < state.discardCount[otherPlayer]; card++) {
             state.discard[otherPlayer][card] = rand() % (treasure_map + 1);
         }
 
         // Gain a tribute card
-        gainCard(tribute, &state, TO_HAND, currentPlayer);
+        //gainCard(tribute, &state, TO_HAND, currentPlayer);
 
         // Get variable snapshots
         numActionsBefore = state.numActions;
