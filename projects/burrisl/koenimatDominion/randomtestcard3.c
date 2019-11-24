@@ -100,13 +100,13 @@ int main() {
         }
         // Get 2 random cards from top of discard pile
         else if (state.deckCount[otherPlayer] == 0 && state.discardCount[otherPlayer] > 1) {
-            tributeRevealedCards[0] = state.discard[otherPlayer][state.discardCount[otherPlayer]];
-            tributeRevealedCards[1] = state.discard[otherPlayer][state.discardCount[otherPlayer] - 1];
+            tributeRevealedCards[0] = state.discard[otherPlayer][state.discardCount[otherPlayer] - 1];
+            tributeRevealedCards[1] = state.discard[otherPlayer][state.discardCount[otherPlayer] - 2];
         }
         // Get 2 random cards from top of deck
         else if (state.deckCount[otherPlayer] > 1) {
-            tributeRevealedCards[0] = state.deck[otherPlayer][state.deckCount[otherPlayer]];
-            tributeRevealedCards[1] = state.deck[otherPlayer][state.deckCount[otherPlayer] - 1];
+            tributeRevealedCards[0] = state.deck[otherPlayer][state.deckCount[otherPlayer] - 1];
+            tributeRevealedCards[1] = state.deck[otherPlayer][state.deckCount[otherPlayer] - 2];
         }
 
         printf("Card 1: %d\n", tributeRevealedCards[0]);
