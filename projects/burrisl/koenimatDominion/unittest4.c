@@ -64,7 +64,6 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 1 - state->deckCount[nextPlayer] > 0 (copper)");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
     checkTrue(state.coins, 2, "Coins are Correct");
     checkTrue(state.numActions, 0, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
@@ -94,7 +93,6 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 2 - state->deckCount[nextPlayer] > 0 (estate)");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
     checkTrue(state.coins, 0, "Coins are Correct");
     checkTrue(state.numActions, 0, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 7, "Hand Count is Correct"); // 5 + 2 = 7
@@ -125,7 +123,6 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 3 - state->deckCount[nextPlayer] > 0 (action)");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
     checkTrue(state.coins, 0, "Coins are Correct");
     checkTrue(state.numActions, 2, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
@@ -157,7 +154,6 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 4 - state->deckCount[nextPlayer] > 0 (copper)");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
     checkTrue(state.coins, 2, "Coins are Correct");
     checkTrue(state.numActions, 0, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
@@ -189,7 +185,6 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 5 - state->deckCount[nextPlayer] > 0 (estate)");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
     checkTrue(state.coins, 0, "Coins are Correct");
     checkTrue(state.numActions, 0, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 7, "Hand Count is Correct"); // 5 + 2 = 7
@@ -221,33 +216,38 @@ int main(int argc, char** argv) {
 
     // Do tests
     printFormatted("SUBTEST 6 - state->deckCount[nextPlayer] > 0 (action)");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
     checkTrue(state.coins, 0, "Coins are Correct");
     checkTrue(state.numActions, 2, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
 
     /***************************************************************************************
-    ** else {}
+    ** If discardCount and deckCount are equal to 0 there should be no cards to reveal so
+    ** nothing should happen
     ***************************************************************************************/
+
     // Standard Estate setup
     memset(&state, 23, sizeof(struct gameState));
     initializeGame(numPlayers, k, 618, &state);
     state.handCount[currentPlayer] = 5;
     for (int i = 0; i < state.handCount[currentPlayer]; i++) {
-    	state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+        state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
     }
 
     // Switch variables so test should pass
     state.coins = 0;
-    state.discardCount[currentPlayer] = 4;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 0;
     state.deckCount[otherPlayer] = 0;
+    state.deck[otherPlayer][0] = adventurer;
 
     tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
 
     // Do tests
-    printFormatted("SUBTEST 3 - else{}.");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Deck Count Decreases by 1");
-    checkTrue(state.deckCount[otherPlayer], 0, "Other Player Discard Count Decreases by 1");
+    printFormatted("SUBTEST 7 - deckCount and discardCount = 0");
+    checkTrue(state.coins, 0, "Coins are Correct");
+    checkTrue(state.numActions, 2, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
 
 	return 0;
 }
