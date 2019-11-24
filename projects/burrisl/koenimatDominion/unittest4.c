@@ -245,12 +245,12 @@ int main(int argc, char** argv) {
     // Do tests
     printFormatted("SUBTEST 7 - deckCount and discardCount = 0");
     checkTrue(state.coins, 0, "Coins are Correct");
-    checkTrue(state.numActions, 2, "Actions are Correct");
+    checkTrue(state.numActions, 0, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 5, "Hand Count is Correct");
 
     /***************************************************************************************
     ** Duplicate Action Cards
-    ** Actions should be increased by only 2
+    ** Actions should be increased by only 2 not 4
     ***************************************************************************************/
 
     // Standard Estate setup
@@ -280,7 +280,7 @@ int main(int argc, char** argv) {
 
     /***************************************************************************************
     ** Duplicate Treasure Cards
-    ** Coins should be increased by only 2
+    ** Coins should be increased by only 2 not 4
     ***************************************************************************************/
 
     // Standard Estate setup
@@ -310,7 +310,7 @@ int main(int argc, char** argv) {
 
     /***************************************************************************************
     ** Duplicate Victory Cards
-    ** Hand Count should be increased by only 2
+    ** Hand Count should be increased by only 2 not 4
     ***************************************************************************************/
 
     // Standard Estate setup
@@ -336,6 +336,42 @@ int main(int argc, char** argv) {
     printFormatted("SUBTEST 10 - deckCount and discardCount = 0");
     checkTrue(state.coins, 0, "Coins are Correct");
     checkTrue(state.numActions, 0, "Actions are Correct");
+    checkTrue(state.handCount[currentPlayer], 7, "Hand Count is Correct");
+
+    /***************************************************************************************
+    ** No cards in deck but greater than 1 cards in discard so move to deck
+    ** Going to use 5 different cards
+    ** One victory and one action so actions should increase by 2 and
+    ** hand count should increase by 2
+    ***************************************************************************************/
+
+    // Standard Estate setup
+    memset(&state, 23, sizeof(struct gameState));
+    initializeGame(numPlayers, k, 618, &state);
+    state.handCount[currentPlayer] = 5;
+    for (int i = 0; i < state.handCount[currentPlayer]; i++) {
+        state.hand[currentPlayer][i] = estate; // Set all of the cards to estates
+    }
+
+    // Switch variables so test should pass
+    state.coins = 0;
+    state.numActions = 0;
+    state.deckCount[currentPlayer] = 10; // So we can draw cards
+    state.discardCount[otherPlayer] = 5;
+    state.deckCount[otherPlayer] = 0;
+    
+    state.discard[0] = copper;
+    state.discard[1] = silver;
+    state.discard[2] = estate;
+    state.discard[3] = baron; // this one matters
+    state.discard[4] = province; // this one matters
+
+    tributeCardEffect(0, 0, 0, 0, &state, 0, 0); // Need extra arguments because of function sig
+
+    // Do tests
+    printFormatted("SUBTEST 11 - deckCount and discardCount = 0");
+    checkTrue(state.coins, 0, "Coins are Correct");
+    checkTrue(state.numActions, 2, "Actions are Correct");
     checkTrue(state.handCount[currentPlayer], 7, "Hand Count is Correct");
 
 	return 0;
