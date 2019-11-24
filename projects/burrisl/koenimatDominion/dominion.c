@@ -1302,6 +1302,9 @@ int tributeCardEffect(int card, int choice1, int choice2, int choice3, struct ga
             drawCard(currentPlayer, state);
             drawCard(currentPlayer, state);
         }
+        else if (tributeRevealedCards[i] == -1) { // Need to delete this
+            // Do nothing
+        }
         else { //Action Card
             state->numActions = state->numActions + 2;
         }
