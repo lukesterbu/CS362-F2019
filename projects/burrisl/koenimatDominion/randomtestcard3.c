@@ -67,9 +67,9 @@ int main() {
         initializeGame(numPlayers, k, 618, &state);
 
         // Randomly set the size of different variables
-        state.handCount[otherPlayer] = rand() % 10;
-        state.discardCount[otherPlayer] = rand() % 100;
-        state.deckCount[otherPlayer] = rand() % 100;
+        state.handCount[otherPlayer] = 10; //rand() % 10;
+        state.discardCount[otherPlayer] = 10; //rand() % 100;
+        state.deckCount[otherPlayer] = 10; //rand() % 100;
 
         // Add random cards to the hand
         for (int card = 0; card < state.handCount[otherPlayer]; card++) {
